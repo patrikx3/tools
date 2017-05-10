@@ -1,0 +1,50 @@
+{
+    "name": "p3x-tools",
+    "version": "1.1.20-19",
+    "corifeus": {
+        "prefix": "p3x-",
+        "publish": true,
+        "type": "p3x",
+        "time": "5/6/2017, 5:53:13 PM",
+        "time-stamp": 1494085993698
+    },
+    "bin": {
+        "p3x-tools": "bin/p3x-tools.js"
+    },
+    "license": "MIT",
+    "description": "NPM Tools",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "grunt"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/patrikx3/tools.git"
+    },
+    "keywords": [
+        "tools",
+        "unpublish",
+        "npm"
+    ],
+    "author": "Patrik Laszlo <alabard@gmail.com>",
+    "bugs": {
+        "url": "https://github.com/patrikx3/tools/issues"
+    },
+    "homepage": "https://patrikx3.github.io/tools/",
+    "devDependencies": {
+        "corifeus-builder": "^1.7.504-501",
+        "mz": "^2.6.0",
+        "pdfjs-dist": "^1.8.325"
+    },
+    "dependencies": {
+        "commander": "^2.9.0",
+        "corifeus-utils": "^1.1.100-140",
+        "fs-extra": "^3.0.1"
+    },
+    "engines": {
+        "node": ">=7.8.0"
+    }
+}
