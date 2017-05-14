@@ -1,4 +1,4 @@
-const pdfjs = require('pdfjs-dist');
+//const pdfjs = require('pdfjs-dist');
 //const fsExtra = require('fs-extra');
 const mz = require('mz');
 

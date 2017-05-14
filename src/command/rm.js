@@ -3,7 +3,7 @@ const commander = require('commander');
 const fsExtra = require('fs-extra');
 
 commander
-    .command('rmdirr <dirs...>')
+    .command('rm <dirs...>')
     .description(`
 Delete the list of directories (without start ./ and end /) recursively
 `)

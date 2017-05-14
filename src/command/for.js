@@ -4,7 +4,7 @@ const fsExtra = require('fs-extra');
 const utils = require('corifeus-utils');
 
 commander
-    .command('forr <dir> <command...>')
+    .command('for <dir> <command...>')
     .description(`
 Finds a list of directories (without start ./ and end /) recursively
 `)
@@ -34,10 +34,10 @@ popd
 //                console.log(generatedCommand);
             } else  {
                 const run = utils.childProcess.exec(generatedCommand);
-                run.stdout.on('data', (data) => {
+                run.exec.stdout.on('data', (data) => {
                     console.info(data);
                 });
-                run.stderr.on('data', (data) => {
+                run.exec.stderr.on('data', (data) => {
                     console.error(data);
                 });
                 promises.push(run);

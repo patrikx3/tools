@@ -1,3 +1,4 @@
+/*
 const commander = require('commander');
 
 // unpublish
@@ -13,3 +14,4 @@ Parse a pdf file
     })
 ;
 
+*/

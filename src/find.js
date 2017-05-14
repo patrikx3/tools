@@ -6,10 +6,9 @@ const multi = async (options) => {
     await options.find.forEachAsync(async (findable) => {
         const resolved = path.resolve(options.root, findable);
         const finds = await mz.fs.exists(resolved);
-
-        if (finds ) {
+        if (finds) {
             const stat = await mz.fs.stat(resolved);
-            if (stat.isDirectory()) {
+            if (options.all || stat.isDirectory()) {
                 options.results.push(resolved);
             }
         }
@@ -22,14 +21,13 @@ const multi = async (options) => {
             if (!stat.isDirectory()) {
                 return;
             }
-            if (options.find.includes(foundDir)) {
+            if (options.find.includes(foundDir) || options.excludes.includes(foundDir)) {
                 return;
             }
-            foundHitPromises.push(multi({
-                find: options.find,
-                root: resolvedFoundDir,
-                results: options.results,
-            }))
+
+            const newOptions = Object.assign({}, options)
+            newOptions.root = resolvedFoundDir;
+            foundHitPromises.push(multi(newOptions))
         })
         await Promise.all(foundHitPromises);
 
@@ -41,6 +39,7 @@ module.exports = async (options) => {
     options.root = options.root || process.cwd();
     options.results = options.results || [];
 
+    console.log(`Options: ${JSON.stringify(options, null, 2)}`)
 
     if (!Array.isArray(options.find)) {
         options.find = [options.find];
@@ -55,6 +54,8 @@ module.exports = async (options) => {
         }
         return findable;
     })
+    options.all = options.all || false;
+    options.excludes = options.excludes || [];
     return await multi(options);
 };
 
