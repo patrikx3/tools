@@ -19,7 +19,7 @@ const removeVersion = (repo, version, keptVersions, dry, all)  => {
         }
     }
 
-    const command = `npm unpublish ${repo}@${version}`;
+    const command = `npm unpublish ${repo}@${version} --registry https://registry.npmjs.org`;
     if (dry) {
         console.info(`[DRY] Removed version ${version}`);
         console.info(command)

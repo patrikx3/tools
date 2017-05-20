@@ -1,7 +1,6 @@
 const utils = require('corifeus-utils');
 const globby = require('globby');
-const mz = require('mz');
-const ini = require('ini');
+const path = require('path');
 
 const truncate = async (options) => {
 
@@ -11,6 +10,7 @@ git add -A
 git commit -am "p3x-robot"
 git branch -D master
 git branch -m master
+git branch --set-upstream-to origin/master master
 git push -f origin master`
 
     console.log(command);
@@ -19,21 +19,13 @@ git push -f origin master`
     }
 }
 
-const replaceGitSubmodules = async(root, user) => {
-    const files = await globby(`${root}/**/.gitmodules`)
-    await files.forEachAsync(async(file) => {
-        console.info(`Found submodule: ${file}`)
-        const string = (await mz.fs.readFile(file)).toString();
-        const iniFile = ini.parse(string);
-        Object.keys(iniFile).forEach((key) => {
-            const submodule = iniFile[key]
-            submodule.url = `https://github.com/${user}/${submodule.path}`;
-        })
-        const result = ini.stringify(iniFile);
-        await mz.fs.writeFile(file, result);
-        console.info(`Submodule: ${file}, replaced`)
-    })
+const findModules = async(root) => {
+    const modules = await globby(`${root}/**/.gitmodules`);
+    return modules.map((dir) => {
+        return path.dirname(dir);
+    });
 }
 
+
+module.exports.findModules = findModules;
 module.exports.truncate = truncate;
-module.exports.replaceGitSubmodules = replaceGitSubmodules;

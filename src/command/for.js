@@ -9,23 +9,36 @@ commander
 Finds a list of directories (without start ./ and end /) recursively
 `)
     .option('-d, --dry', 'Do not actually remove packages, just show what it does')
+    .option('-t, --types <types>', 'Defaults is all, options: d = directory, f = file, like -t=f,d', (val) => {
+        return val.split(',');
+    })
+    .option('-x, --exclude <items>', 'Exclude paths, default is node_module', (val) => {
+        const types = {};
+        val.split(',').forEach((type) => types[type] = true);
+    })
     .action(async function (dir, command, options) {
         command = command.join(' ');
         const find = require('../find');
         console.info(`Directory finding: ${dir}`)
+
         const paths = await find({
-            find: dir
+            find: dir,
+            type: options.types || {
+                d: true,
+                f: true
+            }
         });
         const dry = options.dry || false;
         if (dry) {
             console.info(`Dry, doesn't do anything, just shows what it does`)
         }
         const promises = [];
-        paths.forEach(async (path) => {
+        paths.forEach(async (findData) => {
             const generatedCommand = `bash -c '
-pushd ${path}            
+pushd ${findData.dir}            
 set -e
-export FOUND=${path}                
+export FOUND_DIR=${findData.dir}                
+export FOUND=${findData.path}                
 ${command}            
 popd
 '`;

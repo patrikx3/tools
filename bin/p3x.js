@@ -13,11 +13,13 @@ const start = async() => {
         .usage('[options]')
     ;
 
+
     require('../src/command/rm')
     require('../src/command/npm')
     require('../src/command/for')
     require('../src/command/git')
     require('../src/command/github')
+    require('../src/command/each')
 
 
     /*

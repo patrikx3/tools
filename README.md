@@ -1,39 +1,63 @@
 [//]: #@corifeus-header
 
-[![Build Status](https://travis-ci.org/patrikx3/tools.svg?branch=master)](https://travis-ci.org/patrikx3/tools)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/patrikx3/tools/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/patrikx3/tools/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/patrikx3/tools/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/patrikx3/tools/?branch=master)  [![Trello](https://img.shields.io/badge/Trello-p3x-026aa7.svg)](https://trello.com/b/gqKHzZGy/p3x)
+  [![Build Status](https://travis-ci.org/patrikx3/tools.svg?branch=master)](https://travis-ci.org/patrikx3/tools)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/patrikx3/tools/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/patrikx3/tools/?branch=master)  [![Code Coverage](https://scrutinizer-ci.com/g/patrikx3/tools/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/patrikx3/tools/?branch=master) 
 
   
 [![NPM](https://nodei.co/npm/p3x-tools.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/p3x-tools/)
-------
+---
 
-# NPM Tools
+ 
+# Tools
+
+## Issues / Support
+This is an open source project. Time is a precious thing, so I have rarely time to give support and fix issues for someone else. I fix a bug, when I have an error that I need. If you got an issue, error or bug, I hope someone will have time to do it for you, otherwise, you are on your own.
+
+Though, if I know the solution, I will tell you. Besides, core errors will be fixed by me.
+
+***If you want to extend, fix bugs or add in new features, I promptly merge pull requests or you can become a ```patrikx3``` member.***
 
 ### Node Version Requirement 
-``` >=7.8.0 ```  
+``` 
+>=7.8.0 
+```  
+   
+### Built on Node 
+``` 
+v7.10.0
+```   
    
 The ```async``` and ```await``` keywords are required.
 
-# Description
+Install NodeJs:    
+https://nodejs.org/en/download/package-manager/    
+  
+# Description  
 
-
+                        
 [//]: #@corifeus-header:end
 
 ## Install
 ```javascript
-npm install -g p3x-tools
-p3x-tools -h
-p3x-tools forr -h 
-p3x-tools rmdirr -h 
-p3x-tools unpublish -h 
+npm install -g p3x
+p3x -h
+p3x for -h 
+p3x git -h 
+p3x github -h 
+p3x ncu -h 
+p3x npm -h 
+p3x rm -h 
 ```
+
 
 ## Examples
 ```javascript
-p3x-tools forr node_modules 'echo $FOUND; ls -all'
+p3x for node_modules 'echo $FOUND; ls -all'
 
-p3x-tools unpublish --dry --username patrixk3 --search corifeus,p3x 
+p3x git each 'ls -all'
 
-p3x-tools rmdirr --dry node_modules  
+p3x npm unpublish --dry --username patrixk3 --search corifeus,p3x 
+
+p3x rm --dry node_modules  
 ```
 
 **It is used for primarily Unix/BSD/Linux/OSX, using Bash.**
@@ -82,8 +106,9 @@ Version: ```Major.Minor.Commit-Build```
 [//]: #@corifeus-footer
 
 ---
-[**P3X-TOOLS**](https://patrikx3.github.com/tools) Build v1.1.21-2 on 5/9/2017, 8:49:10 PM
+[**P3X-TOOLS**](https://patrikx3.github.com/tools) Build v1.1.50-74
 
-by [Patrik Laszlo](http://patrikx3.tk) 
+[Corifeus](http://www.corifeus.tk) by [Patrik Laszlo](http://patrikx3.tk)
+
 
 [//]: #@corifeus-footer:end

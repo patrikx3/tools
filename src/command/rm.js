@@ -1,4 +1,3 @@
-// rmdirr dir dirs
 const commander = require('commander');
 const fsExtra = require('fs-extra');
 

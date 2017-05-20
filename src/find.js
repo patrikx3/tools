@@ -8,8 +8,16 @@ const multi = async (options) => {
         const finds = await mz.fs.exists(resolved);
         if (finds) {
             const stat = await mz.fs.stat(resolved);
-            if (options.all || stat.isDirectory()) {
-                options.results.push(resolved);
+            if (
+                (options.type.hasOwnProperty('d') && stat.isDirectory())
+                ||
+                (options.type.hasOwnProperty('f') && stat.isFile())
+            ) {
+                options.results.push({
+                    path: resolved,
+                    dir: stat.isFile() ? path.dirname(resolved) : resolved,
+//                    stat: stat
+                });
             }
         }
         const foundHit= await mz.fs.readdir(options.root)
@@ -21,7 +29,7 @@ const multi = async (options) => {
             if (!stat.isDirectory()) {
                 return;
             }
-            if (options.find.includes(foundDir) || options.excludes.includes(foundDir)) {
+            if (options.find.includes(foundDir) || options.exclude.includes(foundDir)) {
                 return;
             }
 
@@ -39,6 +47,11 @@ module.exports = async (options) => {
     options.root = options.root || process.cwd();
     options.results = options.results || [];
 
+    options.type = options.type || {
+        d: true,
+        f: true,
+    };
+
     console.log(`Options: ${JSON.stringify(options, null, 2)}`)
 
     if (!Array.isArray(options.find)) {
@@ -54,8 +67,10 @@ module.exports = async (options) => {
         }
         return findable;
     })
-    options.all = options.all || false;
-    options.excludes = options.excludes || [];
+    options.exclude = options.exclude || [
+        'node_modules',
+        'bower_components',
+    ];
     return await multi(options);
 };
 

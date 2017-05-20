@@ -2,12 +2,17 @@ const commander = require('commander');
 const utils = require('corifeus-utils');
 const mz = require('mz');
 const hasin = require('lodash/hasIn');
+const globby = require('globby');
 
+const npmLib = require('../npm');
 
-const hasPackage = async () => {
+const commands = [
+    'publish',
+    'update',
+    'login',
+    'unpublish',
+]
 
-}
-// unpublish
 commander
     .command('npm <command> [packages...]')
     .description(`
@@ -15,7 +20,7 @@ commander
     If you omit the package name, it will use all.
 
     commands:
-        unpublish
+        ${commands.join(', ')}
 
 `)
     .option('-u, --username [username]', 'Author username, defaults to patrikx3',  (val) => {
@@ -58,11 +63,9 @@ commander
                 if (await mz.fs.exists('./package.json')) {
                     const pkg = require(`${process.cwd()}/package.json`);
                     if (hasin(pkg, 'corifeus.publish') && pkg.corifeus.publish === true) {
-                        await utils.childProcess.exec(`
-grunt publish || true
-npm publish || true
-npm publish --registry https://registry.npmjs.org
-                `, true)
+                        await utils.childProcess.exec(npmLib.command.publish({
+                            all: options.all
+                        }), true)
                     } else {
                         console.info(`This package.json has not corifeus.publish = true`);
                     }
