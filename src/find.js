@@ -44,6 +44,11 @@ const multi = async (options) => {
 }
 
 module.exports = async (options) => {
+    if (typeof options === 'string') {
+        options = {
+            find: options
+        }
+    }
     options.root = options.root || process.cwd();
     options.results = options.results || [];
 

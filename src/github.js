@@ -73,12 +73,13 @@ git status
             try {
                 await utils.childProcess.exec(`
 cd ${tmpDir.path}/github/${repo.name}
-((git commit -am "${note} ${new Date().toLocaleString()}") || true) && ${dry ? 'true' : 'git push'}
+git commit -am "${note} ${new Date().toLocaleString()}"
+${dry ? 'true' : 'git push'}
 `, true)
             } catch(e) {
                 errors.push(e);
             }
-        })
+        }, true)
 
         const modules = await git.findModules(`${tmpDir.path}/github/`)
         await modules.forEachAsync(async(module) => {
@@ -86,12 +87,12 @@ cd ${tmpDir.path}/github/${repo.name}
 cd ${module}
 git pull
 git checkout master
+git submodule update --init --recursive  --remote
 git submodule foreach --recursive git checkout master
-git submodule foreach --recursive git pull
 git status
-${dry ? '' : 'git push'}
+${dry ? 'true' : 'git push'}
 `, true)
-        })
+        }, true)
 
         console.info('All done')
     } catch(e ) {

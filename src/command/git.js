@@ -5,6 +5,7 @@ const path = require('path');
 const git = require('../git');
 const mz = require('mz');
 
+const lib = require('../lib');
 
 //p3x for .git 'cd ..;p3x git truncate'
 const commands = [
@@ -14,7 +15,7 @@ const commands = [
     'push',
 ]
 commander
-    .command('git <command> [plusCommands...]')
+    .command('git [command] [plusCommands...]')
     .description(`
     The versioning is Major.Minor.Commit-Build
     If you omit the package name, it will use all.
@@ -28,20 +29,11 @@ commander
     .action(async function (command, plusCommands, options) {
         let paths;
 
-        plusCommands = plusCommands.join(' ');
-
-        const executeCommandByPath = async (findData, command) => {
-            await utils.childProcess.exec(`
-bash -c '
-pushd ${findData.dir}            
-set -e
-export FOUND_DIR=${findData.dir}                
-export FOUND=${findData.path}                
-${command}
-popd
-'
-`, true)
+        if (command === undefined) {
+            command = 'list';
         }
+
+        plusCommands = plusCommands.join(' ').trim();
 
         switch(command) {
 
@@ -51,60 +43,38 @@ popd
                 await truncate(options);
                 break;
 
-            case 'push':
-                await utils.childProcess.exec(`
-git add .
-git commit -am 'p3x-robot-push'
-git push
-`, true)
-                break;
-
-            case 'pkg':
-            case 'build':
-                paths = await find({
-                    find: 'package.json',
-                });
-
-                let count = 0;
-                await paths.forEachAsync(async (findData) => {
-                    const pkg = JSON.parse((await mz.fs.readFile(findData.path)).toString());
-                    let deps = Object.keys(Object.assign(pkg.dependencies || {}, pkg.devDependencies || {}));
-                    let hasBuilder;
-
-                    if (pkg.name !== undefined && pkg.name.startsWith('corifeus-builder')) {
-                        hasBuilder = true;
-                    } else if (command === 'build') {
-                        hasBuilder = deps.find((dep) => {
-                            return dep.startsWith('corifeus-builder');
-                        })
-                    } else {
-                        hasBuilder = true;
-                    }
-                    if (plusCommands === 'ncu') {
-                        plusCommands = `ncu ${options.all ? '-a' : ''} --loglevel verbose --packageFile package.json`;
-                    }
-                    if (hasBuilder !== undefined ) {
-                        count++
-                        if (plusCommands.trim() !== 'count') {
-                            await executeCommandByPath(findData, plusCommands)
-                        }
-                    }
-                })
-                console.info(`Count: ${count}`)
-                break;
-
             case 'each':
             case 'count':
-                paths = await find({
-                    find: '.git',
-                });
+            case 'list':
+            case 'push':
+                paths = await find('.git');
+
+                paths = paths.map(pathActual => {
+                    if (pathActual.dir === pathActual.path) {
+                        pathActual.dir = path.dirname(pathActual.dir);
+                    }
+                    return pathActual;
+                })
+
                 if (command === 'count') {
                     console.info(paths.length);
                     return
                 }
                 await paths.forEachAsync(async (findData) => {
-                 await executeCommandByPath(findData, plusCommands)
-                })
+                    if (command === 'list') {
+                        console.log(path.basename(findData.dir));
+                    } else {
+                        await utils.repeat(2, async() => {
+                            await lib.executeCommandByPath({
+                                findData: findData,
+                                command: `git add .
+git commit -am 'p3x-robot-push' || true
+git push || true
+${plusCommands === '' ? 'true' : plusCommands}`,
+                            })
+                        }, true)
+                    }
+                }, true)
                 break;
 
             default:
