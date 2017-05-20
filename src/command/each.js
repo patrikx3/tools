@@ -81,7 +81,7 @@ const executeCommand = async (command, plusCommands, options) => {
     }
 
     if (plusCommands === 'start') {
-        plusCommands = `ncu -u --loglevel verbose --packageFile package.json
+        plusCommands = `ncu -a --loglevel verbose --packageFile package.json
 yarn install        
 ${npmLib.command.publish({ all: options.all } )}`;
     }

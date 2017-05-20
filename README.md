@@ -106,7 +106,7 @@ Version: ```Major.Minor.Commit-Build```
 [//]: #@corifeus-footer
 
 ---
-[**P3X-TOOLS**](https://patrikx3.github.com/tools) Build v1.1.53-83
+[**P3X-TOOLS**](https://patrikx3.github.com/tools) Build v1.1.54-84
 
 [Corifeus](http://www.corifeus.tk) by [Patrik Laszlo](http://patrikx3.tk)
 
