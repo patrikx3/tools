@@ -8,17 +8,23 @@ const url = require('url');
 const git = require('./git');
 
 const list = async(options) => {
-    const {user , exclude } = options;
+    const {only, user , exclude } = options;
     const gh = new GitHub();
     const response = await gh.getUser(user).listRepos();
     const repos = response.data
     return repos.filter(repo => {
-        return repo.full_name === `${user}/${repo.name}` && !exclude.includes(repo.name)
+        let isOnly;
+        if (only !== undefined) {
+            isOnly = only.includes(repo.name)
+        } else {
+            isOnly = true;
+        }
+        return repo.full_name === `${user}/${repo.name}` && !exclude.includes(repo.name) && isOnly;
     });
 }
 
 const mirror = async(options) => {
-    let { user, password, gitUrl, dry, note, exclude } = options;
+    let { only, user, password, gitUrl, dry, note, exclude } = options;
     let tmpDir;
     const errors = [];
     try {
@@ -27,6 +33,7 @@ const mirror = async(options) => {
         const repos = await list({
             user: user,
             exclude: exclude,
+            only: only
         });
 
         await repos.forEachAsync(async(repo) => {

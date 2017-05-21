@@ -11,7 +11,9 @@ Delete the list of directories (without start ./ and end /) recursively
         const find = require('../find');
         const files = await find({
             find: dirs,
-            type: 'd'
+            type: {
+                d: true
+            }
         });
         const dry = options.dry || false;
         if (dry) {
@@ -20,9 +22,9 @@ Delete the list of directories (without start ./ and end /) recursively
         const promises = [];
         files.forEach(async (file) => {
             if (!dry) {
-                promises.push(fsExtra.remove(file));
+                promises.push(fsExtra.remove(file.path));
             }
-            console.info(`Delete ${file}`)
+            console.info(`Delete ${file.path}`)
         })
         Promise.all(promises);
     })

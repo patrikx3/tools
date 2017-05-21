@@ -8,6 +8,7 @@ const multi = async (options) => {
         const finds = await mz.fs.exists(resolved);
         if (finds) {
             const stat = await mz.fs.stat(resolved);
+
             if (
                 (options.type.hasOwnProperty('d') && stat.isDirectory())
                 ||
@@ -57,8 +58,6 @@ module.exports = async (options) => {
         f: true,
     };
 
-    console.log(`Options: ${JSON.stringify(options, null, 2)}`)
-
     if (!Array.isArray(options.find)) {
         options.find = [options.find];
     }
@@ -72,10 +71,19 @@ module.exports = async (options) => {
         }
         return findable;
     })
-    options.exclude = options.exclude || [
-        'node_modules',
-        'bower_components',
-    ];
+    if (!options.exclude) {
+        options.exclude = [];
+        const excluder = (path) => {
+            if (!options.find.includes(path)) {
+                options.exclude.push(path);
+            }
+        }
+        excluder('node_modules')
+        excluder('bower_components')
+    }
+    console.log(`Options: ${JSON.stringify(options, null, 2)}`)
+
+
     return await multi(options);
 };
 

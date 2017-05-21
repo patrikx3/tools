@@ -33,6 +33,9 @@ commander
     .option('-x, --exclude <items>', `Exclude paths, default is ${defaultGithubExcludes.join(',')}`, (val) => {
         return val.split(',');
     })
+    .option('-o, --only <items>', `Only included paths, default is all`, (val) => {
+        return val.split(',');
+    })
     .action(async function (command, options) {
         const user = options.user || 'patrikx3';
         const gitUrl = options.git || 'https://git.patrikx3.tk' ;
@@ -66,6 +69,7 @@ git pull https://github.com/patrikx3/$GIT_NAME ${branch}`, true);
                     dry: options.dry,
                     note: note,
                     exclude: exclude,
+                    only: options.only
                 })
                 break;
 

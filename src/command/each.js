@@ -29,6 +29,10 @@ const getPkgAndDeps = async(file) => {
     return [pkg, deps];
 }
 
+const getNcu = (options) => {
+    return `ncu ${options.all ? '-a -u' : ''} --loglevel verbose --packageFile package.json`
+}
+
 const executeCommand = async (command, plusCommands, options) => {
     let errors = [];
     plusCommands = plusCommands.join(' ').trim();
@@ -69,6 +73,9 @@ const executeCommand = async (command, plusCommands, options) => {
         ]
     });
 
+    const allList = list.slice();
+
+
     if (command === 'publish') {
         list = list.filter(item => {
             return item.pkg.hasOwnProperty('corifeus') && item.pkg.corifeus.publish === true;
@@ -76,16 +83,20 @@ const executeCommand = async (command, plusCommands, options) => {
         options.serial = true;
     }
 
+
     if (plusCommands === '') {
         plusCommands = 'list';
     }
 
     if (plusCommands === 'start') {
-        plusCommands = `ncu -a --loglevel verbose --packageFile package.json
-yarn install        
+        plusCommands = `${getNcu({all: true})}
+yarn install --non-interactive      
 ${npmLib.command.publish({ all: options.all } )}`;
     }
 
+    let ncuCommand = getNcu(options);
+
+    const actual = [];
     await list.forEachAsync(async (item) => {
         const {findData , pkg, deps} = item;
         let hasBuilder;
@@ -100,10 +111,10 @@ ${npmLib.command.publish({ all: options.all } )}`;
             hasBuilder = true;
         }
         if (plusCommands === 'ncu') {
-            plusCommands = `ncu ${options.all ? '-a' : ''} --loglevel verbose --packageFile package.json`;
+            plusCommands = ncuCommand;
         }
         if (hasBuilder !== undefined ) {
-            count++
+            actual.push(item);
             switch (plusCommands) {
                 case 'count':
                     break;
@@ -127,10 +138,50 @@ ${npmLib.command.publish({ all: options.all } )}`;
                         })
                     }
             }
+        } else {
+            remained.push(item);
         }
     }, options.serial)
 
-    console.info(`Count: ${count}`)
+    let remained = [];
+    allList.forEach(allItem => {
+        let found = false;
+        actual.forEach((actualItem) => {
+            if (actualItem.name === allItem.name) {
+                found = true;
+            }
+        })
+        if (!found) {
+            remained.push(allItem);
+        }
+    })
+
+    await remained.forEachAsync(async (item) => {
+        const {findData , pkg, deps} = item;
+        if (options.dry) {
+            console.info('------------------------------------');
+            console.info(findData.path);
+            console.info(pkg.name);
+            console.info(ncuCommand)
+        } else {
+            await lib.executeCommandByPath({
+                findData: findData,
+                command: ncuCommand,
+                errors:  errors,
+            })
+        }
+
+    })
+
+    console.info(`All: ${allList.map((item) => item.name)}`)
+    console.info();
+    console.info(`Actual: ${actual.map((item) => item.name)}`)
+    console.info();
+    console.info(`Remained: ${remained.map((item) => item.name)}`)
+    console.info();
+    console.info(`Actual count: ${actual.length}`)
+    console.info();
+    console.info(`Serial: ${options.serial}`)
     if (errors.length > 0) {
         console.error(`Errors: ${errors.length}`);
         console.error(errors)
