@@ -18,7 +18,7 @@ Finds a list of directories (without start ./ and end /) recursively
     })
     .action(async function (dir, command, options) {
         command = command.join(' ');
-        const find = require('../find');
+        const find = utils.fs.find;
         console.info(`Directory finding: ${dir}`)
 
         const paths = await find({

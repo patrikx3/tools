@@ -1,6 +1,6 @@
 const commander = require('commander');
 const utils = require('corifeus-utils');
-const find = require('../find');
+const find = utils.fs.find;
 const path = require('path');
 const git = require('../git');
 const mz = require('mz');
@@ -8,25 +8,50 @@ const mz = require('mz');
 const npmLib = require('../npm');
 const lib = require('../lib');
 
+const allCommands = [
+    'link',
+    'publish',
+    'pkg',
+    'build',
+];
+
+const publishableCommand = [
+    'link',
+    'publish'
+];
+
 const loadCommander = (command) => {
     commander
         .command(`${command} [plusCommands...]`)
         .option('-d, --dry', 'Do not actually remove packages, just show what it does')
         .option('-a, --all', 'All')
         .option('-s, --serial', 'Serial ')
+        .option('-n, --non-interactive', 'Non interfactive')
+        .option('-r, --registry', 'Registry')
+        .option('-m, --packageManager <name>', 'Package manager')
+        .option('-o, --only <only>', 'Only packages', (list) => {
+            return list.split(',');
+        })
         .action(async function (plusCommands, options) {
             await executeCommand(command, plusCommands, options);
         })
     ;
 }
-loadCommander('pkg');
-loadCommander('build');
-loadCommander('publish');
+
+allCommands.forEach((cmd) => loadCommander(cmd))
 
 const getPkgAndDeps = async(file) => {
-    const pkg = JSON.parse((await mz.fs.readFile(file)).toString());
-    let deps = Object.keys(Object.assign(pkg.dependencies || {}, pkg.devDependencies || {}));
-    return [pkg, deps];
+    const data = (await mz.fs.readFile(file)).toString();
+    try {
+        const pkg = JSON.parse(data);
+        let deps = Object.keys(Object.assign(pkg.dependencies || {}, pkg.devDependencies || {}));
+        return [pkg, deps];
+    } catch(e) {
+        console.error();
+        console.error(file);
+        console.error();
+        throw e;
+    }
 }
 
 const getNcu = (options) => {
@@ -37,9 +62,32 @@ const executeCommand = async (command, plusCommands, options) => {
     let errors = [];
     plusCommands = plusCommands.join(' ').trim();
 
+    if (plusCommands === 'ncu') {
+        plusCommands += '  --loglevel verbose --packageFile package.json'
+    }
+
+
+    if (options.nonInteractive) {
+        plusCommands += ' --non-interactive'
+    }
+
+    if (options.registry) {
+        plusCommands += ' --registry https://registry.npmjs.com/'
+    }
+
+    if (options.packageManager) {
+        plusCommands += ' --packageManager ' + options.packageManager
+    }
+
+    if (options.all && plusCommands !== 'start') {
+        plusCommands += ' -a'
+    }
+
+
     let paths = await find({
         find: 'package.json',
     });
+
 
     let count = 0;
 
@@ -75,14 +123,29 @@ const executeCommand = async (command, plusCommands, options) => {
 
     const allList = list.slice();
 
-
-    if (command === 'publish') {
+    if (publishableCommand.includes(command)) {
         list = list.filter(item => {
             return item.pkg.hasOwnProperty('corifeus') && item.pkg.corifeus.publish === true;
         })
-        options.serial = true;
     }
 
+    if (options.only !== undefined) {
+        list = list.filter(item => {
+            return options.only.includes(item.pkg.name);
+        })
+    }
+
+    switch(command) {
+        case 'publish':
+            options.serial = true;
+            break;
+
+        case 'link':
+            plusCommands = `yarn unlink || true
+yarn link            
+`;
+            break;
+    }
 
     if (plusCommands === '') {
         plusCommands = 'list';
@@ -94,9 +157,11 @@ yarn install --non-interactive
 ${npmLib.command.publish({ all: options.all } )}`;
     }
 
-    let ncuCommand = getNcu(options);
-
     const actual = [];
+    let doActualExecute = false;
+    const displayCommand = `${command} ${plusCommands}`;
+    const bar = lib.newProgress(command, list);
+    let remained = [];
     await list.forEachAsync(async (item) => {
         const {findData , pkg, deps} = item;
         let hasBuilder;
@@ -110,41 +175,44 @@ ${npmLib.command.publish({ all: options.all } )}`;
         } else {
             hasBuilder = true;
         }
-        if (plusCommands === 'ncu') {
-            plusCommands = ncuCommand;
-        }
         if (hasBuilder !== undefined ) {
             actual.push(item);
             switch (plusCommands) {
                 case 'count':
-                    break;
                 case 'deps':
-                    break;
                 case 'list':
                     console.info(pkg.name)
+                    utils.repeat(2, () => {
+                        bar.tick({
+                            token: pkg.name
+                        })
+                    })
                     break;
 
                 default:
-                    if (options.dry) {
-                        console.info('------------------------------------');
-                        console.info(findData.path);
-                        console.info(pkg.name);
-                        console.info(plusCommands)
-                    } else {
-                        await lib.executeCommandByPath({
-                            findData: findData,
-                            command: plusCommands,
-                            errors:  errors,
-                        })
+                    if (!options.dry) {
+                        doActualExecute = true;
                     }
+                    await lib.executeCommandByPath({
+                        findData: findData,
+                        command: plusCommands,
+                        errors:  errors,
+                        item: item,
+                        options: options,
+                        bar : bar
+                    })
             }
         } else {
+            utils.repeat(2, () => {
+                bar.tick({
+                    token: pkg.name
+                })
+            })
             remained.push(item);
         }
     }, options.serial)
 
-    let remained = [];
-    allList.forEach(allItem => {
+    remained.forEach(allItem => {
         let found = false;
         actual.forEach((actualItem) => {
             if (actualItem.name === allItem.name) {
@@ -154,24 +222,44 @@ ${npmLib.command.publish({ all: options.all } )}`;
         if (!found) {
             remained.push(allItem);
         }
-    })
+    }, options.serial)
 
-    await remained.forEachAsync(async (item) => {
-        const {findData , pkg, deps} = item;
-        if (options.dry) {
-            console.info('------------------------------------');
-            console.info(findData.path);
-            console.info(pkg.name);
-            console.info(ncuCommand)
-        } else {
-            await lib.executeCommandByPath({
-                findData: findData,
-                command: ncuCommand,
-                errors:  errors,
-            })
-        }
+    if ((doActualExecute || options.dry) && publishableCommand.includes(command)) {
+        const afterBar = lib.newProgress(command, list);
 
-    })
+        await allList.forEachAsync(async (item) => {
+            const {findData , pkg, deps} = item;
+
+            let execCommand;
+            switch(command) {
+                case 'publish':
+                    execCommand = `
+${getNcu({all: true})}
+rm -rf ./node_modules
+yarn install
+`;
+                    break;
+
+                case 'link':
+                    if (item.wants.length > 0) {
+                        execCommand = `
+yarn link ${item.wants.join(' \nyarn link ')} 
+`
+                    }
+                    break;
+            }
+            if (execCommand !== undefined) {
+                await lib.executeCommandByPath({
+                    findData: findData,
+                    command: execCommand,
+                    errors:  errors,
+                    item: item,
+                    options: options,
+                    bar : afterBar
+                })
+            }
+        })
+    }
 
     console.info(`All: ${allList.map((item) => item.name)}`)
     console.info();
@@ -181,9 +269,12 @@ ${npmLib.command.publish({ all: options.all } )}`;
     console.info();
     console.info(`Actual count: ${actual.length}`)
     console.info();
-    console.info(`Serial: ${options.serial}`)
+    console.info(`Serial: ${options.serial ? 'true' : 'false'}`)
     if (errors.length > 0) {
         console.error(`Errors: ${errors.length}`);
         console.error(errors)
     }
+
+    console.info();
+    console.info(displayCommand)
 }

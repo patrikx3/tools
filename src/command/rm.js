@@ -1,5 +1,6 @@
 const commander = require('commander');
 const fsExtra = require('fs-extra');
+const utils = require('corifeus-utils');
 
 commander
     .command('rm <dirs...>')
@@ -8,7 +9,7 @@ Delete the list of directories (without start ./ and end /) recursively
 `)
     .option('-d, --dry', 'Do not actually remove packages, just show what it does')
     .action(async function (dirs, options) {
-        const find = require('../find');
+        const find = utils.fs.find;
         const files = await find({
             find: dirs,
             type: {

@@ -1,6 +1,6 @@
 const commander = require('commander');
 const utils = require('corifeus-utils');
-const find = require('../find');
+const find = utils.fs.find;
 const path = require('path');
 const git = require('../git');
 const mz = require('mz');
@@ -13,6 +13,7 @@ const commands = [
     'renew',
     'each',
     'push',
+    'pull',
 ]
 commander
     .command('git [command] [plusCommands...]')
@@ -26,6 +27,7 @@ commander
 `)
     .option('-d, --dry', 'Do not actually remove packages, just show what it does')
     .option('-a, --all', 'All')
+    .option('-s, --serial', 'Serial')
     .action(async function (command, plusCommands, options) {
         let paths;
 
@@ -47,6 +49,7 @@ commander
             case 'count':
             case 'list':
             case 'push':
+            case 'pull':
                 paths = await find('.git');
 
                 paths = paths.map(pathActual => {
@@ -56,25 +59,52 @@ commander
                     return pathActual;
                 })
 
-                if (command === 'count') {
-                    console.info(paths.length);
-                    return
-                }
-                await paths.forEachAsync(async (findData) => {
-                    if (command === 'list') {
+                let internalCommand;
+                switch (command) {
+                    case 'count':
+                        console.info(paths.length);
+                        break;
+
+                    case 'each':
+                        break;
+
+                    case 'list':
                         console.log(path.basename(findData.dir));
-                    } else {
-                        await utils.repeat(2, async() => {
-                            await lib.executeCommandByPath({
-                                findData: findData,
-                                command: `git add .
+                        break;
+
+                    case 'push':
+                        await paths.forEachAsync(async (findData) => {
+                            await utils.repeat.async(2, async() => {
+                                await lib.executeCommandByPath({
+                                    findData: findData,
+                                    options: options,
+                                    command:  `git add .
 git commit -am 'p3x-robot-push' || true
 git push || true
 ${plusCommands === '' ? 'true' : plusCommands}`,
-                            })
+                                })
+                            }, true)
                         }, true)
-                    }
-                }, true)
+                        break;
+
+                    case 'pull':
+                        internalCommand = `git pull`
+                        break;
+                }
+
+                if (internalCommand !== undefined) {
+                    let errors = [];
+                    const bar = lib.newProgress(command, paths)
+                    await paths.forEachAsync(async (findData) => {
+                        await lib.executeCommandByPath({
+                            findData: findData,
+                            command: internalCommand,
+                            options: options,
+                            errors: errors,
+                            bar: bar,
+                        })
+                    }, options.serial)
+                }
                 break;
 
             default:

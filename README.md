@@ -36,77 +36,34 @@ https://nodejs.org/en/download/package-manager/
                         
 [//]: #@corifeus-header:end
 
-## Install
-```javascript
-npm install -g p3x
-p3x -h
-p3x for -h 
-p3x git -h 
-p3x github -h 
-p3x ncu -h 
-p3x npm -h 
-p3x rm -h 
+This is an internal tool program (```p3x```) to manage a recursive async and serial command for NPM packages.  
+
+# Examples
+
+All folders exclude ```node_modules``` and ```bower_components``` except it is included.
+
+```bash
+p3x docker clean # delete images the have exited
+p3x docker clear # delete all images in docker
+p3x pkg yarn install | <command> # installs recursive every project that has a package.json
+p3x build yarn install  | <command>  # install recursive every package that has a corifeus-builder
+p3x npm unpublish # unpublish every package from NPM except the last Minor version (Major.Minor.Build-Commit)
+p3x link # links every recursive given package together
+p3x git <command> # you can execute a command on every git dir, recursive
+p3x rm <folder> # remove recursive the given folder
+p3x ncu -a # updates recursive all packages
+p3x git pull # recursive pull every folder
+p3x git push # recursive push every folder
 ```
 
+If you want the commands is serials, add the ```-s``` or ```--serial``` flag, otherwise all ```async```.
 
-## Examples
-```javascript
-p3x for node_modules 'echo $FOUND; ls -all'
-
-p3x git each 'ls -all'
-
-p3x npm unpublish --dry --username patrixk3 --search corifeus,p3x 
-
-p3x rm --dry node_modules  
-```
-
-**It is used for primarily Unix/BSD/Linux/OSX, using Bash.**
-
-* Functions
-  * NPM find (recursive)
-  * NPM remove resursive delete directories
-  * NPM unpublish packages (able to keep only the latest version by minor version)
-    * Major.Minor.Commit-Build
-      * So instead
-        * 4.1.55-44
-        * 4.1.54-33
-        * 4.0.53-32
-        * 4.0.52-30
-        * 1.3.44-23
-        * 1.3.40-20
-        * 1.3.28-10
-        * 1.3.22-9
-        * 1.3.21-8
-        * 1.2.20-7
-        * 1.1.10-5
-        * 1.0.9-5
-      * Becomes
-        * 4.1.55-44
-        * 4.0.53-32
-        * 1.3.44-23
-        * 1.2.20-7
-        * 1.1.10-5
-        * 1.0.9-5
-
-# Docs
-
-## Unpublish
-
-Version: ```Major.Minor.Commit-Build```
-
-1. unpublish all, keep all last minor versions
-1. corifeus - ```publish all```
-1. p3x-systemd-manager - ```ncu -a, publish```
-1. p3x-angular-compile - ```ncu -a, publish```
-1. p3x-aes-folder - ```ncu -a, publish```
-1. server-scripts - ```ncu -a```
-1. linux-defaults - ```ncu -a```
-1. corifeus - ```ncu -a```
+etc ...
 
 [//]: #@corifeus-footer
 
 ---
-[**P3X-TOOLS**](https://pages.corifeus.tk/tools) Build v1.1.58-94
+[**P3X-TOOLS**](https://pages.corifeus.tk/tools) Build v1.1.72-125
 
 [Corifeus](http://www.corifeus.tk) by [Patrik Laszlo](http://patrikx3.tk)
 

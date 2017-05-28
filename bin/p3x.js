@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+if (!require('fs').existsSync(`${__dirname}/../node_modules`)) {
+    require('child_process').execSync(`cd ${__dirname}/..; yarn install`, {
+        stdio: 'inherit'
+    });
+}
+
 const commander = require('commander');
 const utils = require('corifeus-utils');
 const pkg = require(`../package.json`);
@@ -20,6 +26,8 @@ const start = async() => {
     require('../src/command/git')
     require('../src/command/github')
     require('../src/command/each')
+    require('../src/command/ncu')
+    require('../src/command/docker')
 
 
     /*

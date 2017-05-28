@@ -1,6 +1,6 @@
 const commander = require('commander');
 const utils = require('corifeus-utils');
-const find = require('../find');
+const find = utils.fs.find;
 const path = require('path');
 const github = require('../github');
 
@@ -10,6 +10,7 @@ const defaultGithubExcludes = [
     'jGrowl',
     'stackicons',
     'grunt-angular-templates',
+    'electron-apps',
 ]
 
 //p3x for .git 'cd ..;p3x git truncate'
