@@ -28,6 +28,7 @@ const start = async() => {
     require('../src/command/each')
     require('../src/command/ncu')
     require('../src/command/docker')
+    require('../src/command/server')
 
 
     /*

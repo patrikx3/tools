@@ -20,12 +20,27 @@ const publishableCommand = [
     'publish'
 ];
 
+const read = async (options, bar) => {
+
+    if (options.read) {
+        if (bar) {
+            bar.interrupt(`
+Wait for enter...
+
+`)
+        }
+        await utils.input.key();
+    }
+
+}
+
 const loadCommander = (command) => {
     commander
         .command(`${command} [plusCommands...]`)
         .option('-d, --dry', 'Do not actually remove packages, just show what it does')
         .option('-a, --all', 'All')
         .option('-s, --serial', 'Serial ')
+        .option('-r, --read', 'read a key')
         .option('-n, --non-interactive', 'Non interfactive')
         .option('-r, --registry', 'Registry')
         .option('-m, --packageManager <name>', 'Package manager')
@@ -152,7 +167,8 @@ yarn link
     }
 
     if (plusCommands === 'start') {
-        plusCommands = `${getNcu({all: true})}
+        plusCommands = `rm -rf node_modules        
+${getNcu({all: true})}
 yarn install --non-interactive      
 ${npmLib.command.publish({ all: options.all } )}`;
     }
@@ -193,6 +209,7 @@ ${npmLib.command.publish({ all: options.all } )}`;
                     if (!options.dry) {
                         doActualExecute = true;
                     }
+
                     await lib.executeCommandByPath({
                         findData: findData,
                         command: plusCommands,
@@ -201,6 +218,8 @@ ${npmLib.command.publish({ all: options.all } )}`;
                         options: options,
                         bar : bar
                     })
+                    await read(options, bar)
+
             }
         } else {
             utils.repeat(2, () => {
@@ -225,7 +244,7 @@ ${npmLib.command.publish({ all: options.all } )}`;
     }, options.serial)
 
     if ((doActualExecute || options.dry) && publishableCommand.includes(command)) {
-        const afterBar = lib.newProgress(command, list);
+        const afterBar = lib.newProgress(`post ${command}`, list);
 
         await allList.forEachAsync(async (item) => {
             const {findData , pkg, deps} = item;
@@ -249,6 +268,7 @@ yarn link ${item.wants.join(' \nyarn link ')}
                     break;
             }
             if (execCommand !== undefined) {
+
                 await lib.executeCommandByPath({
                     findData: findData,
                     command: execCommand,
@@ -257,8 +277,9 @@ yarn link ${item.wants.join(' \nyarn link ')}
                     options: options,
                     bar : afterBar
                 })
+                await read(options, afterBar)
             }
-        })
+        }, options.serial )
     }
 
     console.info(`All: ${allList.map((item) => item.name)}`)

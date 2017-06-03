@@ -31,7 +31,7 @@ const removeVersion = (repo, version, keptVersions, dry, all)  => {
                 return reject(e);
             }
             if (stderr !== '') {
-                return reject(stderr);
+                return reject(new Error(stderr));
             }
             console.info(`Removed version ${version}`);
             return resolve(stdout);

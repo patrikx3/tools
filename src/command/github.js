@@ -11,6 +11,7 @@ const defaultGithubExcludes = [
     'stackicons',
     'grunt-angular-templates',
     'electron-apps',
+    'npm-check-updates',
 ]
 
 //p3x for .git 'cd ..;p3x git truncate'
