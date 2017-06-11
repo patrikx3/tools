@@ -4,7 +4,6 @@ const find = utils.fs.find;
 const path = require('path');
 const github = require('../github');
 
-
 const defaultGithubExcludes = [
     'cookie',
     'jGrowl',
@@ -12,6 +11,7 @@ const defaultGithubExcludes = [
     'grunt-angular-templates',
     'electron-apps',
     'npm-check-updates',
+    'node-v8-workers',
 ]
 
 //p3x for .git 'cd ..;p3x git truncate'

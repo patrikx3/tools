@@ -35,6 +35,7 @@ Wait for enter...
 }
 
 const loadCommander = (command) => {
+
     commander
         .command(`${command} [plusCommands...]`)
         .option('-d, --dry', 'Do not actually remove packages, just show what it does')
@@ -48,6 +49,7 @@ const loadCommander = (command) => {
             return list.split(',');
         })
         .action(async function (plusCommands, options) {
+
             await executeCommand(command, plusCommands, options);
         })
     ;
@@ -102,7 +104,6 @@ const executeCommand = async (command, plusCommands, options) => {
     let paths = await find({
         find: 'package.json',
     });
-
 
     let count = 0;
 

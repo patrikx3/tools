@@ -25,7 +25,7 @@ Besides, when I can support, please note, I cannot support old versions, only th
    
 ### Built on Node 
 ``` 
-v8.0.0
+v8.1.0
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -34,7 +34,7 @@ Install NodeJs:
 https://nodejs.org/en/download/package-manager/    
   
 ### Updating
-Since, I work full time, I can work only on weekends and Github updates are released only Sundays. Minor errors can be released any time, but reflects will be shown only in NPM.     
+Since, I work full time, I can work only on weekends. Github updates are released only Sundays. Minor errors can be released any time, but reflects will be shown only in NPM.     
   
 # Description  
 
@@ -75,23 +75,29 @@ http://cdn.corifeus.tk/git/tools/src/command/github.js
 
 1. Clone your fork:
 
-    git clone git@github.com:YOUR-USERNAME/YOUR-FORKED-REPO.git
+```bash
+git clone git@github.com:YOUR-USERNAME/YOUR-FORKED-REPO.git
+```
 
 1. Add remote from original repository in your forked repository: 
 
-    cd into/cloned/fork-repo
-    git remote add upstream git://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git
-    git fetch upstream
+```bash
+cd into/cloned/fork-repo  
+git remote add upstream git://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git  
+git fetch upstream  
+```
 
 1. Updating your fork from original repo to keep up with their changes:
 
-    git pull upstream master
+```bash
+git pull upstream master
+```
     
     
 [//]: #@corifeus-footer
 
 ---
-[**P3X-TOOLS**](https://pages.corifeus.tk/tools) Build v1.1.82-14
+[**P3X-TOOLS**](https://pages.corifeus.tk/tools) Build v1.1.88-27
 
 [Corifeus](http://www.corifeus.tk) by [Patrik Laszlo](http://patrikx3.tk)
 

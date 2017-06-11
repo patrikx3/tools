@@ -72,6 +72,7 @@ mv ${tmpDir.path}/git/ ${tmpDir.path}/github/
             await utils.childProcess.exec(`
 cd ${tmpDir.path}/github/${repo.name}
 pwd
+rm -rf ./idea
 git add .
 git status
 `, true)
