@@ -25,7 +25,7 @@ Besides, when I can support, please note, I cannot support old versions, only th
    
 ### Built on Node 
 ``` 
-v8.1.0
+v8.1.2
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -97,7 +97,7 @@ git pull upstream master
 [//]: #@corifeus-footer
 
 ---
-[**P3X-TOOLS**](https://pages.corifeus.tk/tools) Build v1.1.88-27
+[**P3X-TOOLS**](https://pages.corifeus.tk/tools) Build v1.1.90-31
 
 [Corifeus](http://www.corifeus.tk) by [Patrik Laszlo](http://patrikx3.tk)
 
