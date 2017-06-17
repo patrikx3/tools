@@ -137,17 +137,17 @@ const executeCommand = async (command, plusCommands, options) => {
         ]
     });
 
+    if (options.only !== undefined) {
+        list = list.filter(item => {
+            return options.only.includes(item.pkg.name);
+        })
+    }
+
     const allList = list.slice();
 
     if (publishableCommand.includes(command)) {
         list = list.filter(item => {
             return item.pkg.hasOwnProperty('corifeus') && item.pkg.corifeus.publish === true;
-        })
-    }
-
-    if (options.only !== undefined) {
-        list = list.filter(item => {
-            return options.only.includes(item.pkg.name);
         })
     }
 

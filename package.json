@@ -34,11 +34,11 @@
     },
     "homepage": "https://pages.corifeus.tk/tools",
     "devDependencies": {
-        "corifeus-builder": "^1.7.660-16"
+        "corifeus-builder": "^1.7.661-19"
     },
     "dependencies": {
         "commander": "^2.9.0",
-        "corifeus-utils": "^1.1.328-18",
+        "corifeus-utils": "^1.1.332-26",
         "fs-extra": "^3.0.1",
         "github-api": "^3.0.0",
         "globby": "^6.1.0",
