@@ -29,8 +29,9 @@ const start = async() => {
     require('../src/command/ncu')
     require('../src/command/docker')
     require('../src/command/server')
+    require('../src/command/redis')
 
-
+// redis-cli KEYS chrome:* | xargs redis-cli DEL
     /*
     const isInModule = await mz.fs.exists(`${__dirname}/../../node_modules`);
     if (!isInModule) {

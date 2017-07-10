@@ -1,0 +1,12 @@
+{
+  "excludes":  [
+    "cookie",
+    "jGrowl",
+    "stackicons",
+    "grunt-angular-templates",
+    "electron-apps",
+    "npm-check-updates",
+    "node-v8-workers",
+    "entware-packages-3x"
+  ]
+}

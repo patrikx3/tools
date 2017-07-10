@@ -57,9 +57,9 @@ etc ...
 
 
 # Default excludes for CDN:
-http://cdn.corifeus.tk/git/corifeus-app-web-pages/src/json/settings.json
+http://cdn.corifeus.com/git/corifeus-app-web-pages/src/json/settings.json
 
-http://cdn.corifeus.tk/git/tools/src/command/github.js
+http://cdn.corifeus.com/git/tools/src/command/github.js
 
 # Github fork upstream
 
@@ -88,8 +88,8 @@ git pull upstream master
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.tk/tools) Build v1.1.98-45
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.109-56
 
-[Corifeus](http://www.corifeus.tk) by [Patrik Laszlo](http://patrikx3.tk)
+[Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 
 [//]: #@corifeus-footer:end

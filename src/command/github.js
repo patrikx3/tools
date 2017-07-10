@@ -4,15 +4,7 @@ const find = utils.fs.find;
 const path = require('path');
 const github = require('../github');
 
-const defaultGithubExcludes = [
-    'cookie',
-    'jGrowl',
-    'stackicons',
-    'grunt-angular-templates',
-    'electron-apps',
-    'npm-check-updates',
-    'node-v8-workers',
-]
+const defaultGithubExcludes = require('../github.json').excludes
 
 //p3x for .git 'cd ..;p3x git truncate'
 const commands = [
@@ -31,7 +23,7 @@ commander
     .option('-n, --note [note]', 'The note in the commit, the default is p3x-robot sunday release')
     .option('-p, --password [password]', 'The GitHub password or token')
     .option('-b, --branch <branch>', 'The default branch is master')
-    .option('-g, --git <git>', 'The GIT repo, example is https://user:password@git.patrikx3.tk/')
+    .option('-g, --git <git>', 'The GIT repo, example is https://user:password@git.patrikx3.com/')
     .option('-x, --exclude <items>', `Exclude paths, default is ${defaultGithubExcludes.join(',')}`, (val) => {
         return val.split(',');
     })
@@ -40,7 +32,7 @@ commander
     })
     .action(async function (command, options) {
         const user = options.user || 'patrikx3';
-        const gitUrl = options.git || 'https://git.patrikx3.tk' ;
+        const gitUrl = options.git || 'https://git.patrikx3.com' ;
         const note = options.note || 'p3x-robot sunday release'
         const branch = options.branch || 'master';
 

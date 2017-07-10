@@ -1,6 +1,6 @@
 {
     "name": "p3x-tools",
-    "version": "1.1.98-45",
+    "version": "1.1.109-56",
     "corifeus": {
         "prefix": "p3x-",
         "publish": true,
@@ -32,13 +32,13 @@
     "bugs": {
         "url": "https://github.com/patrikx3/tools/issues"
     },
-    "homepage": "https://pages.corifeus.tk/tools",
+    "homepage": "https://pages.corifeus.com/tools",
     "devDependencies": {
-        "corifeus-builder": "^1.7.685-33"
+        "corifeus-builder": "^1.7.700-39"
     },
     "dependencies": {
-        "commander": "^2.10.0",
-        "corifeus-utils": "^1.1.346-40",
+        "commander": "^2.11.0",
+        "corifeus-utils": "^1.1.359-54",
         "fs-extra": "^3.0.1",
         "github-api": "^3.0.0",
         "globby": "^6.1.0",
