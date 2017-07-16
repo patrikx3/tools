@@ -18,7 +18,7 @@ This is an open source project. Just code.
    
 ### Built on Node 
 ``` 
-v8.1.3
+v8.1.4
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -88,7 +88,7 @@ git pull upstream master
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.109-56
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.114-62
 
 [Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 

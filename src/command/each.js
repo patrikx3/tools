@@ -8,6 +8,10 @@ const mz = require('mz');
 const npmLib = require('../npm');
 const lib = require('../lib');
 
+const _ = require('lodash');
+
+const dependenciesFix = require('../../dependencies-fix.json');
+
 const allCommands = [
     'link',
     'publish',
@@ -43,7 +47,7 @@ const loadCommander = (command) => {
         .option('-s, --serial', 'Serial ')
         .option('-r, --read', 'read a key')
         .option('-n, --non-interactive', 'Non interfactive')
-        .option('-r, --registry', 'Registry')
+        .option('--registry', 'Registry')
         .option('-m, --packageManager <name>', 'Package manager')
         .option('-o, --only <only>', 'Only packages', (list) => {
             return list.split(',');
@@ -72,7 +76,13 @@ const getPkgAndDeps = async(file) => {
 }
 
 const getNcu = (options) => {
-    return `ncu ${options.all ? '-a -u' : ''} --loglevel verbose --packageFile package.json`
+    const exclude = dependenciesFix.always;
+    let excludeAddon = '';
+    const excludeKeys = Object.keys(exclude );
+    if (excludeKeys.length > 0) {
+        excludeAddon = `-x ${excludeKeys.join(',')}`
+    }
+    return `ncu ${options.all ? '-a -u' : ''} --loglevel verbose --packageFile package.json ${excludeAddon}`
 }
 
 const executeCommand = async (command, plusCommands, options) => {
@@ -258,6 +268,7 @@ ${getNcu({all: true})}
 rm -rf ./node_modules
 yarn install
 `;
+
                     break;
 
                 case 'link':
@@ -299,4 +310,7 @@ yarn link ${item.wants.join(' \nyarn link ')}
 
     console.info();
     console.info(displayCommand)
+
+    console.info();
+    console.info('Dependencies fix', JSON.stringify(dependenciesFix, null, 4))
 }
