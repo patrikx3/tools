@@ -76,7 +76,7 @@ const getPkgAndDeps = async(file) => {
 }
 
 const getNcu = (options) => {
-    const exclude = dependenciesFix.always;
+    const exclude = dependenciesFix.always || {};
     let excludeAddon = '';
     const excludeKeys = Object.keys(exclude );
     if (excludeKeys.length > 0) {

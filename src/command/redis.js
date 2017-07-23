@@ -6,15 +6,33 @@ const lib = require('../lib');
 
 commander
     .command('redis [command] [param]')
-    .description(`This is for redis`)
+    .option('-u, --url <url>', 'REDIS url')
+    .description(`This is for redis:   
+DEL    
+    `)
     .action(async function (command, param, options) {
-        switch (command) {
+        let addon = '';
+        if (options.url) {
+            console.log(options.url)
+            const url = new (require('url').URL)(options.url)
+            if (url.hostname) {
+                addon += `-h ${url.hostname} `
+            }
+            if (url.password) {
+                addon += `-a ${url.password} `
+            }
+            const pathname = url.pathname.substr(1);
+            if (pathname != '') {
+                addon += `-n ${pathname} `
+            }
+        }
+        switch (command.toLowerCase()) {
             case 'del':
                 if (param === undefined) {
                     throw new Error('DEL require a parameter')
                 }
-                const commandExec = `/usr/bin/redis-cli KEYS ${param} | xargs redis-cli DEL`;
-//                console.info(commandExec);
+                const commandExec = `/usr/bin/redis-cli ${addon}KEYS ${param} | xargs redis-cli ${addon}DEL`;
+                //console.info(commandExec);
                 await utils.childProcess.exec(commandExec, true)
                 break;
         }

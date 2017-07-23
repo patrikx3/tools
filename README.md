@@ -18,7 +18,7 @@ This is an open source project. Just code.
    
 ### Built on Node 
 ``` 
-v8.1.4
+v8.2.1
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -83,12 +83,18 @@ git fetch upstream
 git pull upstream master
 ```
     
+# Warning / deprecate
+```js
+npm deprecate <pkg>[@<version>] <message>
+// or better
+npm deprecate my-thing@"< 0.2.3" "critical bug fixed in v0.2.3"
+```    
     
 [//]: #@corifeus-footer
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.114-62
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.115-69
 
 [Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 
