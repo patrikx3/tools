@@ -4,7 +4,7 @@ const find = utils.fs.find;
 const path = require('path');
 const github = require('../github');
 
-const defaultGithubExcludes = require('../github.json').excludes
+const defaultGithubExcludes = require('../../github.json').excludes
 
 //p3x for .git 'cd ..;p3x git truncate'
 const commands = [

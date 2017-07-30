@@ -10,6 +10,8 @@ const executeCommandByPath = async (options) => {
 
     const name = options.item ? options.item.name : command;
 
+    const token = `${name} ${command}`;
+
     if (options.options.dry) {
         console.info('------------------------------------');
         console.info(findData.path);
@@ -20,7 +22,7 @@ const executeCommandByPath = async (options) => {
         if (bar) {
             utils.repeat(2, () => {
                 bar.tick({
-                    token: name
+                    token: token
                 })
             })
         }
@@ -30,7 +32,7 @@ const executeCommandByPath = async (options) => {
     try {
         if (bar) {
             bar.tick({
-                token: name
+                token: token
             })
         }
 
@@ -79,7 +81,7 @@ popd
 const newProgress = (status, list) => {
     const bar = new progress(`${status}[:bar] :token`, {
         total: list.length  * 2,
-        width: Math.max(list.length * 2, 20) ,
+        width: Math.min(list.length * 2, 20) ,
         complete: '=',
         incomplete: '-',
         clear: true

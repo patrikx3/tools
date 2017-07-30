@@ -55,11 +55,13 @@ If you want the commands is serials, add the ```-s``` or ```--serial``` flag, ot
 
 etc ...
 
+# Dependencies Fix
+http://cdn.corifeus.com/git/tools/dependencies-fix.json
 
 # Default excludes for CDN:
 http://cdn.corifeus.com/git/corifeus-app-web-pages/src/json/settings.json
 
-http://cdn.corifeus.com/git/tools/src/command/github.js
+http://cdn.corifeus.com/git/tools/github.json
 
 # Github fork upstream
 
@@ -94,7 +96,7 @@ npm deprecate my-thing@"< 0.2.3" "critical bug fixed in v0.2.3"
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.117-75
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.120-77
 
 [Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 
