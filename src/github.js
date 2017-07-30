@@ -50,8 +50,12 @@ git submodule update --init --recursive  --remote
 
         console.info('Remove all Git .git dirs and move to Github .git dirs');
         await repos.forEachAsync(async(repo) => {
+            const currentRepo  = `${tmpDir.path}/git/${repo.name}`;
             await utils.childProcess.exec(`
-rm -rf ${tmpDir.path}/git/${repo.name}/.git                        
+rm -rf ${currentRepo}/.git   
+rm -rf ${currentRepo}/yarn.lock
+rm -rf ${currentRepo}/package-lock.json
+                     
 mv ${tmpDir.path}/github/${repo.name}/.git ${tmpDir.path}/git/${repo.name}/
 `, true)
         })
