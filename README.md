@@ -18,7 +18,7 @@ This is an open source project. Just code.
    
 ### Built on Node 
 ``` 
-v8.2.1
+v8.3.0
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -40,6 +40,7 @@ All folders exclude ```node_modules``` and ```bower_components``` except it is i
 ```bash
 p3x docker clean # delete images the have exited
 p3x docker clear # delete all images in docker
+p3x docker free # delete exited containers
 p3x pkg yarn install | <command> # installs recursive every project that has a package.json
 p3x build yarn install  | <command>  # install recursive every package that has a corifeus-builder
 p3x npm unpublish # unpublish every package from NPM except the last Minor version (Major.Minor.Build-Commit)
@@ -96,7 +97,7 @@ npm deprecate my-thing@"< 0.2.3" "critical bug fixed in v0.2.3"
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.133-98
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.138-110
 
 [Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 
