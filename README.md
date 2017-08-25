@@ -97,7 +97,7 @@ npm deprecate my-thing@"< 0.2.3" "critical bug fixed in v0.2.3"
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.177-138
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.180-139
 
 [Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 
