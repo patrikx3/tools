@@ -38,11 +38,11 @@ const mirror = async(options) => {
 
         await repos.forEachAsync(async(repo) => {
             await utils.childProcess.exec(`
-git clone https://${user}:${password}@github.com/${user}/${repo.name} ${tmpDir.path}/github/${repo.name}
+git clone --depth 5 https://${user}:${password}@github.com/${user}/${repo.name} ${tmpDir.path}/github/${repo.name}
 cd ${tmpDir.path}/github/${repo.name}
 git submodule update --init --recursive  --remote
 
-git clone ${gitUrl}/${repo.name}.git ${tmpDir.path}/git/${repo.name}
+git clone --depth 5 ${gitUrl}/${repo.name}.git ${tmpDir.path}/git/${repo.name}
 cd ${tmpDir.path}/git/${repo.name}
 git submodule update --init --recursive  --remote
 `, true)
