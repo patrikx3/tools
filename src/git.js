@@ -15,7 +15,10 @@ git push -f origin master`
 
     console.log(command);
     if (!options.dry) {
-        await utils.childProcess.exec(command, true)
+        await utils.childProcess.exec(command, {
+            display: true,
+            maxBuffer: 1024 * 500,
+        })
     }
 }
 
