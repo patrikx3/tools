@@ -72,6 +72,8 @@ mv ${tmpDir.path}/git/ ${tmpDir.path}/github/
         console.info('Move init.sh to GitHub');
         await replaceInitSh(`${tmpDir.path}/github`, gitUrl, user);
 
+        await replacePkg(`${tmpDir.path}/github`, user);
+
         await repos.forEachAsync(async(repo) => {
             await utils.childProcess.exec(`
 cd ${tmpDir.path}/github/${repo.name}
@@ -126,7 +128,18 @@ ${dry ? 'true' : 'git push'}
 }
 
 
-const replaceGitSubmodules = async(root, user) => {
+const replacePkg= async(root, user) => {
+    const files = await globby(`${root}/**/package.json`)
+    await files.forEachAsync(async(file) => {
+        console.info(`package.json ${file}`)
+        const string = (await mz.fs.readFile(file)).toString();
+        const result = string.replace(/git\.patrikx3\.com\//g, `github.com/${user}/`);
+        await mz.fs.writeFile(file, result);
+        console.info(`package.json replaced ${file}`)
+    })
+}
+
+const replaceGitSubmodules  = async(root, user) => {
     const files = await globby(`${root}/**/.gitmodules`)
     await files.forEachAsync(async(file) => {
         console.info(`submodule found ${file}`)
