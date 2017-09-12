@@ -18,7 +18,7 @@ This is an open source project. Just code.
    
 ### Built on Node 
 ``` 
-v8.4.0
+v8.5.0
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -97,7 +97,7 @@ npm deprecate my-thing@"< 0.2.3" "critical bug fixed in v0.2.3"
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.198-166
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.200-167
 
 [Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 
