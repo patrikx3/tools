@@ -1,4 +1,5 @@
 {
   "always": {
+    "typescript": "2.3.4"
   }
 }

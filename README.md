@@ -61,6 +61,8 @@ p3x git push # recursive push every folder
 p3x git renew|truncate # remote all commits, from #1231 commit to #1
 ```
 
+and more ...
+
 If you want the commands is serials, add the ```-s``` or ```--serial``` flag, otherwise all ```async```.
 
 etc ...
@@ -114,7 +116,7 @@ git gc --prune=now --aggressive
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.217-183
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.232-188
 
 [Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 

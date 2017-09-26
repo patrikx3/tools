@@ -75,14 +75,18 @@ const getPkgAndDeps = async(file) => {
     }
 }
 
-const getNcu = (options) => {
+const dependenciesFixAddon = () => {
     const exclude = dependenciesFix.always || {};
     let excludeAddon = '';
     const excludeKeys = Object.keys(exclude );
     if (excludeKeys.length > 0) {
         excludeAddon = `-x ${excludeKeys.join(',')}`
     }
-    return `ncu ${options.all ? '-a -u' : ''} --loglevel verbose --packageFile package.json ${excludeAddon}`
+    return excludeAddon;
+}
+
+const getNcu = (options) => {
+    return `ncu ${options.all ? '-a -u' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon()}`
 }
 
 const executeCommand = async (command, plusCommands, options) => {
@@ -90,7 +94,7 @@ const executeCommand = async (command, plusCommands, options) => {
     plusCommands = plusCommands.join(' ').trim();
 
     if (plusCommands === 'ncu') {
-        plusCommands += '  --loglevel verbose --packageFile package.json'
+        plusCommands += `  --loglevel verbose --packageFile package.json ${dependenciesFixAddon()}`
     }
 
 
