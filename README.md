@@ -33,6 +33,14 @@ https://nodejs.org/en/download/package-manager/
 
 This is an internal tool program (```p3x```) to manage a recursive async and serial command for NPM packages.  
 
+
+# Install
+
+```bash
+sudo npm install -g p3x-tools --unsafe-perm=true --allow-root
+```
+
+
 # Examples
 
 All folders exclude ```node_modules``` and ```bower_components``` except it is included.
@@ -50,6 +58,7 @@ p3x rm <folder> # remove recursive the given folder
 p3x ncu -a # updates recursive all packages
 p3x git pull # recursive pull every folder
 p3x git push # recursive push every folder
+p3x git renew|truncate # remote all commits, from #1231 commit to #1
 ```
 
 If you want the commands is serials, add the ```-s``` or ```--serial``` flag, otherwise all ```async```.
@@ -93,11 +102,19 @@ npm deprecate <pkg>[@<version>] <message>
 npm deprecate my-thing@"< 0.2.3" "critical bug fixed in v0.2.3"
 ```    
     
+# Really make a bare repo to smaller
+
+https://stackoverflow.com/questions/2116778/reduce-git-repository-size  
+https://stackoverflow.com/questions/3797907/how-to-remove-unused-objects-from-a-git-repository/14729486#14729486  
+```bash
+git gc --prune=now --aggressive
+```    
+    
 [//]: #@corifeus-footer
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.215-178
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.217-183
 
 [Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 
