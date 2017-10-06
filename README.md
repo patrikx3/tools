@@ -1,6 +1,6 @@
 [//]: #@corifeus-header
 
-  [![Build Status](https://travis-ci.org/patrikx3/tools.svg?branch=master)](https://travis-ci.org/patrikx3/tools)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/patrikx3/tools/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/patrikx3/tools/?branch=master)  [![Code Coverage](https://scrutinizer-ci.com/g/patrikx3/tools/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/patrikx3/tools/?branch=master) 
+  [![Build Status](https://travis-ci.org/patrikx3/.svg?branch=master)](https://travis-ci.org/patrikx3/)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/patrikx3//badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/patrikx3//?branch=master)  [![Code Coverage](https://scrutinizer-ci.com/g/patrikx3//badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/patrikx3//?branch=master) 
 
   
 [![NPM](https://nodei.co/npm/p3x-tools.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/p3x-tools/)
@@ -59,6 +59,7 @@ p3x ncu -a # updates recursive all packages
 p3x git pull # recursive pull every folder
 p3x git push # recursive push every folder
 p3x git renew|truncate # remote all commits, from #1231 commit to #1
+p3x git init repo-name # .git is not required, is auto added, post-update is generated so it is my own, specific for the patrikx3.com server git repo (it adds in the webhook), the names are only lower cased forcefully a-z, digit and dash.
 ```
 
 and more ...
@@ -70,9 +71,7 @@ etc ...
 # Dependencies Fix
 http://cdn.corifeus.com/git/tools/dependencies-fix.json
 
-# Default excludes for CDN:
-http://cdn.corifeus.com/git/corifeus-app-web-pages/src/json/settings.json
-
+# Default excludes from GitHub:
 http://cdn.corifeus.com/git/tools/github.json
 
 # Github fork upstream
@@ -116,7 +115,7 @@ git gc --prune=now --aggressive
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.236-190
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.239-199
 
 [Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
 

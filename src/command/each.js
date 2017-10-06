@@ -151,13 +151,28 @@ const executeCommand = async (command, plusCommands, options) => {
         ]
     });
 
+    let allList = list.slice();
+
     if (options.only !== undefined) {
         list = list.filter(item => {
             return options.only.includes(item.pkg.name);
         })
-    }
+        const allListFilter = list.map(item => {
+            return item.pkg.name;
+        })
+        allList = allList.filter(item => {
+            for(let masterItemName of allListFilter) {
+                if (item.pkg.name === masterItemName) {
+                    return true;
+                }
+                if (item.deps.includes(masterItemName)) {
+                    return true;
+                }
+            }
+            return false;
 
-    const allList = list.slice();
+        })
+    }
 
     if (publishableCommand.includes(command)) {
         list = list.filter(item => {
@@ -182,7 +197,7 @@ yarn link
     }
 
     if (plusCommands === 'start') {
-        plusCommands = `rm -rf node_modules        
+        plusCommands = `rm -rf node_modules          
 ${getNcu({all: true})}
 yarn install --non-interactive      
 ${npmLib.command.publish({ all: options.all } )}`;
