@@ -115,8 +115,9 @@ git gc --prune=now --aggressive
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.239-199
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.259-218 
 
-[Corifeus](http://www.corifeus.com) by [Patrik Laszlo](http://patrikx3.com)
+[![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) 
+ 
 
 [//]: #@corifeus-footer:end
