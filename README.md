@@ -18,7 +18,7 @@ This is an open source project. Just code.
    
 ### Built on Node 
 ``` 
-v8.6.0
+v8.7.0
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -76,13 +76,13 @@ http://cdn.corifeus.com/git/tools/github.json
 
 # Github fork upstream
 
-1. Clone your fork:
+1 . Clone your fork:
 
 ```bash
 git clone git@github.com:YOUR-USERNAME/YOUR-FORKED-REPO.git
 ```
 
-1. Add remote from original repository in your forked repository: 
+2 . Add remote from original repository in your forked repository: 
 
 ```bash
 cd into/cloned/fork-repo  
@@ -90,7 +90,7 @@ git remote add upstream git://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-F
 git fetch upstream  
 ```
 
-1. Updating your fork from original repo to keep up with their changes:
+3 . Updating your fork from original repo to keep up with their changes:
 
 ```bash
 git pull upstream master
@@ -115,7 +115,7 @@ git gc --prune=now --aggressive
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.259-218 
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.262-221 
 
 [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) 
  

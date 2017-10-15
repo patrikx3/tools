@@ -7,7 +7,6 @@
     "electron-apps",
     "npm-check-updates",
     "node-v8-workers",
-    "js-written-number",
-    "VS2015-Dark-Npp"
+    "js-written-number"
   ]
 }
