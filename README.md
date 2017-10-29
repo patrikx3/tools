@@ -18,7 +18,7 @@ This is an open source project. Just code.
    
 ### Built on Node 
 ``` 
-v8.8.0
+v8.8.1
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -115,7 +115,7 @@ git gc --prune=now --aggressive
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.273-233 
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.277-235 
 
 [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) 
  
