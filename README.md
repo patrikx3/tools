@@ -13,12 +13,12 @@ This is an open source project. Just code.
 
 ### Node Version Requirement 
 ``` 
->=7.8.0 
+>=8.9.0 
 ```  
    
 ### Built on Node 
 ``` 
-v8.8.1
+v8.9.0
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -115,7 +115,7 @@ git gc --prune=now --aggressive
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.284-244 
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.1.286-245 
 
 [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) [![Donate for Corifeus / P3X](https://img.shields.io/badge/Donate-Corifeus-003087.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=LFRV89WPRMMVE&lc=HU&item_name=Patrik%20Laszlo&item_number=patrikx3&currency_code=HUF&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted) 
 

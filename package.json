@@ -1,12 +1,12 @@
 {
     "name": "p3x-tools",
-    "version": "1.1.284-244",
+    "version": "1.1.286-245",
     "corifeus": {
         "prefix": "p3x-",
         "publish": true,
         "type": "p3x",
         "code": "Split",
-        "nodejs": "v8.8.1"
+        "nodejs": "v8.9.0"
     },
     "bin": {
         "p3x": "bin/p3x.js"
@@ -35,11 +35,11 @@
     },
     "homepage": "https://pages.corifeus.com/tools",
     "devDependencies": {
-        "corifeus-builder": "^1.7.948-200"
+        "corifeus-builder": "^1.7.950-202"
     },
     "dependencies": {
         "commander": "^2.11.0",
-        "corifeus-utils": "^1.1.581-202",
+        "corifeus-utils": "^1.1.583-203",
         "fs-extra": "^4.0.2",
         "github-api": "^3.0.0",
         "globby": "^6.1.0",
@@ -50,6 +50,6 @@
         "tmp-promise": "^1.0.3"
     },
     "engines": {
-        "node": ">=7.8.0"
+        "node": ">=8.9.0"
     }
 }
