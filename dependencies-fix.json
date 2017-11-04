@@ -1,8 +1,13 @@
 {
-  "always": {
-
-  },
-  "always-works-now": {
-    "typescript": "2.3.4"
-  }
+  "keep": [
+    "typescript",
+    "rxjs",
+    "bootstrap",
+    "bootswatch"
+  ],
+  "always-works-now": [
+  ],
+  "disable-update": [
+    "p3x-angular-compile"
+  ]
 }

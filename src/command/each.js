@@ -76,11 +76,10 @@ const getPkgAndDeps = async(file) => {
 }
 
 const dependenciesFixAddon = () => {
-    const exclude = dependenciesFix.always || {};
+    const exclude = dependenciesFix.keep || [];
     let excludeAddon = '';
-    const excludeKeys = Object.keys(exclude );
-    if (excludeKeys.length > 0) {
-        excludeAddon = `-x ${excludeKeys.join(',')}`
+    if (exclude.length > 0) {
+        excludeAddon = `-x ${exclude.join(',')}`
     }
     return excludeAddon;
 }
@@ -125,6 +124,9 @@ const executeCommand = async (command, plusCommands, options) => {
     let list = [];
     await paths.forEachAsync(async (findData) => {
         const [pkg, deps] = await getPkgAndDeps(findData.path);
+        if (dependenciesFix['disable-update'].includes(pkg.name)) {
+            return;
+        }
         key[pkg.name] = true;
         const result = {
             name: pkg.name,
@@ -199,7 +201,7 @@ yarn link
     if (plusCommands === 'start') {
         plusCommands = `rm -rf node_modules          
 ${getNcu({all: true})}
-yarn install --non-interactive      
+yarn install --non-interactive
 ${npmLib.command.publish({ all: options.all } )}`;
     }
 
