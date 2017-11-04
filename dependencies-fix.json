@@ -8,6 +8,5 @@
   "always-works-now": [
   ],
   "disable-update": [
-    "p3x-angular-compile"
   ]
 }
