@@ -1,8 +1,6 @@
 const commander = require('commander');
 const utils = require('corifeus-utils');
 const find = utils.fs.find;
-const path = require('path');
-const git = require('../git');
 const mz = require('mz');
 
 const npmLib = require('../npm');
@@ -43,6 +41,7 @@ const loadCommander = (command) => {
     commander
         .command(`${command} [plusCommands...]`)
         .option('-d, --dry', 'Do not actually remove packages, just show what it does')
+        .option('-z, --disable-ncu', 'Disable ncu')
         .option('-a, --all', 'All')
         .option('-s, --serial', 'Serial ')
         .option('-r, --read', 'read a key')
@@ -85,6 +84,9 @@ const dependenciesFixAddon = () => {
 }
 
 const getNcu = (options) => {
+    if (options.disableNcu === true) {
+        return '';
+    }
     return `ncu ${options.all ? '-a -u' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon()}`
 }
 
@@ -200,7 +202,7 @@ yarn link
 
     if (plusCommands === 'start') {
         plusCommands = `rm -rf node_modules          
-${getNcu({all: true})}
+${getNcu({all: true, disableNcu: options.disableNcu})}
 yarn install --non-interactive
 ${npmLib.command.publish({ all: options.all } )}`;
     }
@@ -284,12 +286,14 @@ ${npmLib.command.publish({ all: options.all } )}`;
             let execCommand;
             switch(command) {
                 case 'publish':
-                    execCommand = `
-${getNcu({all: true})}
+                    if (options.disableNcu !== true) {
+                        execCommand = `
+${getNcu({all: true, disableNcu: options.disableNcu})}
 rm -rf ./node_modules
 yarn install
 `;
 
+                    }
                     break;
 
                 case 'link':
@@ -334,4 +338,5 @@ yarn link ${item.wants.join(' \nyarn link ')}
 
     console.info();
     console.info('Dependencies fix', JSON.stringify(dependenciesFix, null, 4))
+
 }

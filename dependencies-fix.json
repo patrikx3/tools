@@ -3,7 +3,8 @@
     "typescript",
     "rxjs",
     "bootstrap",
-    "bootswatch"
+    "bootswatch",
+    "@ngtools/webpack"
   ],
   "always-works-now": [
   ],
