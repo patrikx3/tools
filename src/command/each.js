@@ -46,6 +46,7 @@ const loadCommander = (command) => {
         .option('-s, --serial', 'Serial ')
         .option('-r, --read', 'read a key')
         .option('-n, --non-interactive', 'Non interfactive')
+        .option('-p, --disable-progress', 'Disable progress')
         .option('--registry', 'Registry')
         .option('-m, --packageManager <name>', 'Package manager')
         .option('-o, --only <only>', 'Only packages', (list) => {
@@ -210,7 +211,10 @@ ${npmLib.command.publish({ all: options.all } )}`;
     const actual = [];
     let doActualExecute = false;
     const displayCommand = `${command} ${plusCommands}`;
-    const bar = lib.newProgress(command, list);
+    let bar;
+    if (options.disableProgress !== true) {
+        bar = lib.newProgress(command, list);
+    }
     let remained = [];
     await list.forEachAsync(async (item) => {
         const {findData , pkg, deps} = item;
@@ -232,11 +236,13 @@ ${npmLib.command.publish({ all: options.all } )}`;
                 case 'deps':
                 case 'list':
                     console.info(pkg.name)
-                    utils.repeat(2, () => {
-                        bar.tick({
-                            token: pkg.name
+                    if (options.disableProgress !== true) {
+                        utils.repeat(2, () => {
+                            bar.tick({
+                                token: pkg.name
+                            })
                         })
-                    })
+                    }
                     break;
 
                 default:
@@ -256,11 +262,13 @@ ${npmLib.command.publish({ all: options.all } )}`;
 
             }
         } else {
-            utils.repeat(2, () => {
-                bar.tick({
-                    token: pkg.name
+            if (options.disableProgress !== true) {
+                utils.repeat(2, () => {
+                    bar.tick({
+                        token: pkg.name
+                    })
                 })
-            })
+            }
             remained.push(item);
         }
     }, options.serial)
