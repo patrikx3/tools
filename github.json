@@ -8,6 +8,7 @@
     "npm-check-updates",
     "node-v8-workers",
     "js-written-number",
-    "p3x-js-written-number"
+    "p3x-js-written-number",
+    "dns-zonefile"
   ]
 }
