@@ -6,8 +6,9 @@
     "bootswatch",
     "@ngtools/webpack"
   ],
-  "always-works-now": [
-  ],
+  "always-works-now": {
+    "@ngtools/webpack": "=1.8.0"
+  },
   "disable-update": [
   ]
 }
