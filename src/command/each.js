@@ -202,7 +202,8 @@ yarn link
     }
 
     if (plusCommands === 'start') {
-        plusCommands = `rm -rf node_modules          
+        plusCommands = `sudo echo "SUDO IS DONE"
+rm -rf node_modules          
 ${getNcu({all: true, disableNcu: options.disableNcu})}
 yarn install --non-interactive
 ${npmLib.command.publish({ all: options.all } )}`;
