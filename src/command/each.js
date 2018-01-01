@@ -287,7 +287,7 @@ ${npmLib.command.publish({ all: options.all } )}`;
     }, options.serial)
 
     if ((doActualExecute || options.dry) && publishableCommand.includes(command)) {
-        const afterBar = lib.newProgress(`post ${command}`, list);
+        const afterBar = lib.newProgress(`post ${command}`, allList);
 
         await allList.forEachAsync(async (item) => {
             const {findData , pkg, deps} = item;
