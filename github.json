@@ -9,6 +9,7 @@
     "node-v8-workers",
     "js-written-number",
     "p3x-js-written-number",
-    "dns-zonefile"
+    "dns-zonefile",
+    "openwrt-node-packages"
   ]
 }

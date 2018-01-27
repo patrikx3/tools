@@ -6,9 +6,9 @@
     "tslib",
     "zone.js",
     "typescript",
+    "@ngtools/webpack",
     "bootstrap",
-    "bootswatch",
-    "@ngtools/webpack"
+    "bootswatch"
   ],
   "always-works-now": {
     "core-js": "^2.4.1",
