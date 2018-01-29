@@ -1,15 +1,7 @@
 {
   "excludes":  [
-    "cookie",
-    "jGrowl",
     "stackicons",
-    "grunt-angular-templates",
-    "electron-apps",
-    "npm-check-updates",
-    "node-v8-workers",
     "js-written-number",
-    "p3x-js-written-number",
-    "dns-zonefile",
-    "openwrt-node-packages"
+    "p3x-js-written-number"
   ]
 }
