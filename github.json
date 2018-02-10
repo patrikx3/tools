@@ -1,7 +1,6 @@
 {
   "excludes":  [
     "stackicons",
-    "js-written-number",
-    "p3x-js-written-number"
+    "js-written-number"
   ]
 }
