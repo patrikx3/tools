@@ -7,7 +7,7 @@
 ---
 
  
-# Tools v1.3.153-350  
+# Tools v1.3.157-358  
 
 This is an open source project. Just code. If you like this code, please add a star in GitHub and you really like, you can donate as well. Thanks you so much!
 
@@ -22,7 +22,7 @@ All my domains (patrikx3.com and corifeus.com) could have errors right now, sinc
    
 ### Built on Node 
 ``` 
-v9.6.1
+v9.7.1
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -93,7 +93,7 @@ git clone git@github.com:YOUR-USERNAME/YOUR-FORKED-REPO.git
 
 ```bash
 cd into/cloned/fork-repo  
-git remote add upstream git://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git  
+git remote add upstream https://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git  
 git fetch upstream  
 ```
 
@@ -126,11 +126,59 @@ npm show p3x-angular-compile versions --json
 ```
 
     
+# Verdaccio NPM fix
+
+https://github.com/verdaccio/verdaccio/issues/577
+
+```text
+docker run --rm -it node:9.2.0-alpine sh
+/ # npm login --registry https://npm.company.com
+Username: admin
+Password:
+Email: (this IS public) admin@company.com
+Logged in as admin on https://npm.company.com/.
+/ # cat ~/.npmrc
+//npm.company.com/:_authToken=Rwl9t+GHjlgP+brFJ6WycIe1y6r3Z+ShUEqsLusmFC11w3n6ex8JdmkMoKv/0U/D
+/ #
+```
+    
+Another solution is like this:
+
+```text
+# project .npmrc
+registry = "https://registry.acmeco.com"
+ca = null
+always-auth = true
+```    
+
+# Swap for Docker
+
+https://askubuntu.com/questions/417215/how-does-kernel-support-swap-limit
+
+Edit:
+
+```bash
+sudo nano /etc/default/grub
+```
+
+Like:
+
+```text
+GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1" 
+```
+
+Update:
+
+```bash
+sudo update-grub
+```
+
+    
 [//]: #@corifeus-footer
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.153-350 
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.157-358 
 
 [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) [![Donate for Corifeus / P3X](https://img.shields.io/badge/Donate-Corifeus-003087.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QZVM4V6HVZJW6)  [![Contact Corifeus / P3X](https://img.shields.io/badge/Contact-P3X-ff9900.svg)](https://www.patrikx3.com/en/front/contact) 
 
