@@ -2,7 +2,6 @@
   "excludes":  [
     "stackicons",
     "js-written-number",
-    "openwrt-node-packages",
-    "mwlwifi"
+    "openwrt-node-packages"
   ]
 }
