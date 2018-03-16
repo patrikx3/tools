@@ -1,8 +1,7 @@
 {
   "keep": [
     "bootstrap",
-    "bootswatch",
-    "github-api"
+    "bootswatch"
   ],
   "not-keep": [
     "@ngtools/webpack",
@@ -12,7 +11,8 @@
     "tslib",
     "zone.js",
     "typescript",
-    "clear"
+    "clear",
+    "github-api"
   ],
   "always-works-now": {
     "github-api": "3.0.0",
@@ -26,11 +26,14 @@
     "@ngtools/webpack": "=1.8.0"
   },
   "errored": {
-    "@ngtools/webpack": "probably, because of new webpack 4"
+    "@ngtools/webpack": "corifeus-builder-angular has a hack to remove the remove decorators"
   },
   "disable-update": [
   ],
   "hack": {
-    "zone.js": "git://github.com/JiaLiPassion/zone.js#jasmine-dist"
+    "zone.js": {
+      "package": "git://github.com/JiaLiPassion/zone.js#jasmine-dist",
+      "info": "the angular/zone.js is not release still, so even master it not working"
+    }
   }
 }
