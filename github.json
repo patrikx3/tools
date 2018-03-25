@@ -2,6 +2,8 @@
   "excludes":  [
     "stackicons",
     "js-written-number",
-    "openwrt-node-packages"
+    "openwrt-node-packages",
+    "angular-cli",
+    "angular"
   ]
 }
