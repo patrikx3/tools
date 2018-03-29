@@ -3,7 +3,6 @@
     "stackicons",
     "js-written-number",
     "openwrt-node-packages",
-    "angular-cli",
-    "angular"
+    "devkit"
   ]
 }
