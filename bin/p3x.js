@@ -36,6 +36,7 @@ const start = async() => {
     require('../src/command/docker')
     require('../src/command/server')
     require('../src/command/redis')
+    require('../src/command/travis')
 
 // redis-cli KEYS chrome:* | xargs redis-cli DEL
     /*

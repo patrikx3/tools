@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "commander": "^2.15.1",
-        "corifeus-utils": "^1.1.894-317",
+        "corifeus-utils": "^1.1.896-319",
         "fs-extra": "^5.0.0",
         "github-api": "^3.0.0",
         "globby": "^8.0.1",
@@ -47,7 +47,8 @@
         "mz": "^2.7.0",
         "npm-check-updates": "^2.14.1",
         "progress": "^2.0.0",
-        "tmp-promise": "^1.0.4"
+        "tmp-promise": "^1.0.4",
+        "yamljs": "^0.3.0"
     },
     "engines": {
         "node": ">=8.9.0"
