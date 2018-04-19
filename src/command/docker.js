@@ -28,7 +28,9 @@ docker rmi $(docker images -q)|| true`, true)
                 break;
 
             default:
-                console.error(`Unknown error: ${command}`)
+                commander.outputHelp();
+
+                console.error(`Unknown command: ${command}`)
                 process.exit(1)
                 break;
         }

@@ -8,17 +8,16 @@ const _ = require('lodash');
 commander
     .command('travis [commands...]')
     .description(`
-It is imporant, that you before you do anything, install the travis Ruby gem.
-You need the ruby-dev environment as well, so 
-    apt install ruby-dev
-    gem search travis
-    gem install travis
-    travis login
+    It is imporant, that before you do anything, install the travis Ruby gem.
+    You need the ruby-dev environment as well, so 
+        apt install ruby-dev        
+        gem install travis (gem search travis - specific version)
+        travis login
 
-    Based on: http://blog.code4hire.com/2016/06/Adding-GitHub-token-to-Travis-CI-configuration/
+        Based on: http://blog.code4hire.com/2016/06/Adding-GitHub-token-to-Travis-CI-configuration/
     
-Commands:
-    github-token: Adds a github token to all .travis files, recursively
+    Commands:
+        github-token: Adds a github token to all .travis files, recursively
           arguments: token or repo token, if you use 1 arguments, it is patrikx3 
           make sure you are logged in travis.
 `)
@@ -101,7 +100,8 @@ ${travisSecureCommand}
                 break;
 
             default:
-                console.error(`Unknown error: ${command}`)
+                commander.outputHelp();
+                console.error(`Unknown command: ${commands[0]}`)
                 process.exit(1)
                 break;
         }
