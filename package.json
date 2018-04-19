@@ -12,7 +12,7 @@
         "p3x": "bin/p3x.js"
     },
     "license": "MIT",
-    "description": "Tools",
+    "description": "💣 Tools",
     "main": "index.js",
     "directories": {
         "test": "test"

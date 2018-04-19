@@ -6,7 +6,7 @@
 
 
  
-# Tools v1.3.240-418  
+# 💣 Tools v1.3.240-418  
 
 This is an open-source project. Star this repository if you like it, or even donate!  Thank you so much! :)
 
