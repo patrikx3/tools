@@ -52,6 +52,9 @@ const loadCommander = (command) => {
         .option('-o, --only <only>', 'Only packages', (list) => {
             return list.split(',');
         })
+        .option('-x, --exclude <only>', 'Exclude packages', (list) => {
+            return list.split(',');
+        })
         .action(async function (plusCommands, options) {
 
             await executeCommand(command, plusCommands, options);
@@ -158,10 +161,7 @@ const executeCommand = async (command, plusCommands, options) => {
 
     let allList = list.slice();
 
-    if (options.only !== undefined) {
-        list = list.filter(item => {
-            return options.only.includes(item.pkg.name);
-        })
+    const reRunAllList = () => {
         const allListFilter = list.map(item => {
             return item.pkg.name;
         })
@@ -177,7 +177,23 @@ const executeCommand = async (command, plusCommands, options) => {
             return false;
 
         })
+
     }
+
+    if (options.only !== undefined) {
+        list = list.filter(item => {
+            return options.only.includes(item.pkg.name);
+        })
+        reRunAllList();
+    }
+
+    if (options.exclude !== undefined) {
+        list = list.filter(item => {
+            return !options.exclude.includes(item.pkg.name);
+        })
+        reRunAllList();
+    }
+
 
     if (publishableCommand.includes(command)) {
         list = list.filter(item => {
@@ -205,7 +221,7 @@ yarn link
         plusCommands = `sudo echo "SUDO IS DONE"
 rm -rf node_modules          
 ${getNcu({all: true, disableNcu: options.disableNcu})}
-yarn install --non-interactive
+yarn install --non-interactive --ignore-engines || npm install --non-interactive
 ${npmLib.command.publish({ all: options.all } )}`;
     }
 
@@ -299,7 +315,7 @@ ${npmLib.command.publish({ all: options.all } )}`;
                         execCommand = `
 ${getNcu({all: true, disableNcu: options.disableNcu})}
 rm -rf ./node_modules
-yarn install
+yarn install --non-interactive --ignore-engines || npm install --non-interactive
 `;
 
                     }

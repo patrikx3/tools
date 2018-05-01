@@ -1,5 +1,6 @@
 {
   "keep": [
+    "rxjs",
     "bootstrap",
     "bootswatch"
   ],

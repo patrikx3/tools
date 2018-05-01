@@ -1,8 +1,6 @@
 {
   "excludes":  [
     "stackicons",
-    "js-written-number",
-    "openwrt-node-packages",
-    "devkit"
+    "openwrt-node-packages"
   ]
 }
