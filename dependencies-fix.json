@@ -1,5 +1,7 @@
 {
   "keep": [
+    "typescript",
+    "zone.js",
     "rxjs",
     "bootstrap",
     "bootswatch"

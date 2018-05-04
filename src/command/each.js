@@ -221,7 +221,7 @@ yarn link
         plusCommands = `sudo echo "SUDO IS DONE"
 rm -rf node_modules          
 ${getNcu({all: true, disableNcu: options.disableNcu})}
-yarn install --non-interactive --ignore-engines || npm install --non-interactive
+npm install --non-interactive
 ${npmLib.command.publish({ all: options.all } )}`;
     }
 
@@ -315,7 +315,7 @@ ${npmLib.command.publish({ all: options.all } )}`;
                         execCommand = `
 ${getNcu({all: true, disableNcu: options.disableNcu})}
 rm -rf ./node_modules
-yarn install --non-interactive --ignore-engines || npm install --non-interactive
+npm install --non-interactive
 `;
 
                     }
