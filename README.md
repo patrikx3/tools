@@ -6,11 +6,11 @@
 
 
  
-# 💣 Tools v1.3.263-447  
+# 💣 Tools v1.3.275-453  
 
 This is an open-source project. Star this repository if you like it, or even donate!  Thank you so much! :)
 
-I run my own server with dynamic IP address so it may happen that the server can not be reachable for about max 5 minutes due to the dynamic DNS. The server may also be unreachable when I backup the SSD with Clonzilla (very rarely) or an electrical issue (but this should not happen again). When the server is down, please hang on for 5-30 minutes and the server will be back up.
+I run my own server with dynamic IP address so it may happen that the server can not be reachable for about max 15 minutes due to the dynamic DNS. The server may also be unreachable when I backup the SSD with Clonzilla (very rarely) or an electrical issue (but this should not happen again). When the server is down, please hang on for 15-30 minutes and the server will be back up.
 
 All my domains (patrikx3.com and corifeus.com) could have errors since I am developing in my free time. However, it is usually stable.
 
@@ -22,7 +22,7 @@ All my domains (patrikx3.com and corifeus.com) could have errors since I am deve
    
 ### Built on Node 
 ``` 
-v10.0.0
+v10.1.0
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -186,7 +186,7 @@ sudo update-grub
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.263-447 
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.275-453 
 
 [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) [![Donate for Corifeus / P3X](https://img.shields.io/badge/Donate-Corifeus-003087.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QZVM4V6HVZJW6)  [![Contact Corifeus / P3X](https://img.shields.io/badge/Contact-P3X-ff9900.svg)](https://www.patrikx3.com/en/front/contact) 
 

@@ -219,7 +219,6 @@ yarn link
 
     if (plusCommands === 'start') {
         plusCommands = `sudo echo "SUDO IS DONE"
-rm -rf node_modules          
 ${getNcu({all: true, disableNcu: options.disableNcu})}
 npm install --non-interactive
 ${npmLib.command.publish({ all: options.all } )}`;
@@ -314,7 +313,6 @@ ${npmLib.command.publish({ all: options.all } )}`;
                     if (options.disableNcu !== true) {
                         execCommand = `
 ${getNcu({all: true, disableNcu: options.disableNcu})}
-rm -rf ./node_modules
 npm install --non-interactive
 `;
 
