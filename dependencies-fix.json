@@ -1,10 +1,6 @@
 {
   "keep": [
-    "typescript",
-    "zone.js",
-    "rxjs",
-    "bootstrap",
-    "bootswatch"
+    "typescript"
   ],
   "not-keep": [
     "@ngtools/webpack",
