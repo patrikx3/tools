@@ -2,6 +2,7 @@
   "excludes":  [
     "stackicons",
     "openwrt-node-packages",
-    "node-sass-css-importer"
+    "node-sass-css-importer",
+    "gitter"
   ]
 }

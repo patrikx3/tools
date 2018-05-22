@@ -53,7 +53,6 @@ git submodule update --init --recursive  --remote
             const currentRepo  = `${tmpDir.path}/git/${repo.name}`;
             await utils.childProcess.exec(`
 rm -rf ${currentRepo}/.git   
-rm -rf ${currentRepo}/yarn.lock
 rm -rf ${currentRepo}/secure
 rm -rf ${currentRepo}/package-lock.json
                      
