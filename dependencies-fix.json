@@ -1,16 +1,24 @@
 {
   "keep": [
-    "typescript",
-    "bootswatch",
-    "bootstrap"
-  ],
-  "not-keep": [
-    "@ngtools/webpack",
     "core-js",
     "reflect-metadata",
     "rxjs",
     "tslib",
     "zone.js",
+    "typescript",
+    "bootswatch",
+    "bootstrap"
+  ],
+  "not-keep": [
+    "core-js",
+    "reflect-metadata",
+    "rxjs",
+    "tslib",
+    "zone.js",
+    "typescript",
+
+    "@ngtools/webpack",
+    "tslib",
     "typescript",
     "clear",
     "github-api"

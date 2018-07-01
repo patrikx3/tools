@@ -6,7 +6,7 @@
 
 
  
-# 💣 Tools v1.3.296-469  
+# 💣 Tools v1.3.298-474  
 
 This is an open-source project. Star this repository if you like it, or even donate!  Thank you so much! :)
 
@@ -23,7 +23,7 @@ All my domains (patrikx3.com and corifeus.com) could have errors since I am deve
    
 ### Built on Node 
 ``` 
-v10.2.1
+v10.5.0
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -187,7 +187,7 @@ sudo update-grub
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.296-469 
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.298-474 
 
 [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) [![Donate for Corifeus / P3X](https://img.shields.io/badge/Donate-Corifeus-003087.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QZVM4V6HVZJW6)  [![Contact Corifeus / P3X](https://img.shields.io/badge/Contact-P3X-ff9900.svg)](https://www.patrikx3.com/en/front/contact) 
 
