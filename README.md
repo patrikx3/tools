@@ -6,7 +6,7 @@
 
 
  
-# 💣 Tools v1.3.298-474  
+# 💣 Tools v1.3.302-484  
 
 This is an open-source project. Star this repository if you like it, or even donate!  Thank you so much! :)
 
@@ -18,12 +18,12 @@ All my domains (patrikx3.com and corifeus.com) could have errors since I am deve
 
 ### Node Version Requirement 
 ``` 
->=10.2.1 
+>=10.5.0 
 ```  
    
 ### Built on Node 
 ``` 
-v10.5.0
+v10.6.0
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -40,6 +40,7 @@ https://nodejs.org/en/download/package-manager/
 
 
 This is an internal tool program (```p3x```) to manage a recursive async and serial command for NPM packages.  
+
 
 
 # Install
@@ -182,12 +183,45 @@ Update:
 sudo update-grub
 ```
 
+# How To Configure a Mail Server Using Postfix, Dovecot, MySQL, and SpamAssassin and Sieve to move to Spam / Junk folder
+
+https://superuser.com/questions/1248257/how-to-configure-a-mail-server-using-postfix-dovecot-mysql-and-spamassassin-a/1248470#1248470
+
+# WINDOWS
+
+## IIS Windows 10 Enterprise
+For `IIS`, I have to use the current user `Domain user` both the web site and the application pools.
+  
+We have to install the `urlrewrite2` module, I think it is here:
+https://www.iis.net/downloads/microsoft/url-rewrite 
+  
+## ALT GR for IntelliJ Idea
+https://intellij-support.jetbrains.com/hc/en-us/community/posts/115000803070/comments/115000663724  
+
+The working solution is to add actionSystem.force.alt.gr=true to custom properties.   
+
+## PHP.INI
+
+```ini
+extension_dir = "C:\php\php-7.2\ext"
+fastcgi.impersonate = 1
+cgi.fix_pathinfo = 0
+cgi.force_redirect = 0
+error_log=C:\php\php-7.2-error.log
+
+extension=php_openssl.dll
+extension=php_mbstring.dll
+zend_extension=php_opcache.dll
+extension=php_gd2.dll
+extension=php_curl.dll
+zend_extension=C:\php\xdebug\php_xdebug-2.7.0alpha1-7.2-vc15-nts-x86_64.dll
+```    
     
 [//]: #@corifeus-footer
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.298-474 
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.302-484 
 
 [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) [![Donate for Corifeus / P3X](https://img.shields.io/badge/Donate-Corifeus-003087.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QZVM4V6HVZJW6)  [![Contact Corifeus / P3X](https://img.shields.io/badge/Contact-P3X-ff9900.svg)](https://www.patrikx3.com/en/front/contact) 
 

@@ -135,7 +135,7 @@ Dry: ${dry}
                     pkg: obj.package,
                     log: `000-This package is invalid: ${obj.package.name} ${obj.package.version}
 
-${JSON.stringify(obj.package, null, 2)}
+${JSON.stringify(obj.package, null, 4)}
 `
                 })
                 return false;

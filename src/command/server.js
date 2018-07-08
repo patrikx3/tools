@@ -29,7 +29,7 @@ commander
                 'Authorization': options.password || ''
             }
         });
-        console.log(JSON.stringify(response.body, null, 2));
+        console.log(JSON.stringify(response.body, null, 4));
 
     })
 ;

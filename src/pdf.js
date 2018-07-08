@@ -18,7 +18,7 @@ const pdf = async(file) => {
     console.log();
     if (meta.metadata) {
         console.log('## Metadata');
-        console.log(JSON.stringify(meta.metadata.metadata, null, 2));
+        console.log(JSON.stringify(meta.metadata.metadata, null, 4));
         console.log();
     }
 
