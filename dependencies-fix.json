@@ -7,8 +7,7 @@
     "zone.js",
     "typescript",
     "bootswatch",
-    "bootstrap",
-    "grunt-contrib-less"
+    "bootstrap"
   ],
   "not-keep": [
     "core-js",
@@ -22,7 +21,8 @@
     "tslib",
     "typescript",
     "clear",
-    "github-api"
+    "github-api",
+    "grunt-contrib-less"
   ],
   "always-works-now": {
     "@ngtools/webpack": "=1.8.0",

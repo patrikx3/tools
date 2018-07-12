@@ -2,17 +2,17 @@
   
 [![NPM](https://nodei.co/npm/p3x-tools.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/p3x-tools/)
 
-  [![Build Status](https://travis-ci.org/patrikx3/tools.svg?branch=master)](https://travis-ci.org/patrikx3/tools)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/patrikx3/tools/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/patrikx3/tools/?branch=master)  [![Code Coverage](https://scrutinizer-ci.com/g/patrikx3/tools/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/patrikx3/tools/?branch=master) 
+  [![Build Status](https://travis-ci.org/patrikx3/tools.svg?branch=master)](https://travis-ci.org/patrikx3/tools) 
 
 
  
-# 💣 Tools v1.3.302-484  
+# 💣 Tools v1.3.305-492  
 
-This is an open-source project. Star this repository if you like it, or even donate!  Thank you so much! :)
+This is an open-source project. Star this repository, if you like it, or even donate! Thank you so much! :)
 
-I run my own server with dynamic IP address so it may happen that the server can not be reachable for about max 15 minutes due to the dynamic DNS. The server may also be unreachable when I backup the SSD with Clonzilla (very rarely) or an electrical issue (but this should not happen again). When the server is down, please hang on for 15-30 minutes and the server will be back up.
+I run my own server with dynamic IP address, so, it may happen, that the server can not be reachable for about max 15 minutes, due to nature of the dynamic DNS. The server may also be unreachable, when I backup the SSD with Clonzilla (very rarely) or an electrical issue (but this should not happen again). When the server is down, please hang on for 15-30 minutes and the server will be back up.
 
-All my domains (patrikx3.com and corifeus.com) could have errors since I am developing in my free time. However, it is usually stable.
+All my domains (patrikx3.com and corifeus.com) could have errors, since I am developing in my free time. However, it is usually stable.
 
 **Bugs are evident™ - MATRIX️**
 
@@ -187,6 +187,129 @@ sudo update-grub
 
 https://superuser.com/questions/1248257/how-to-configure-a-mail-server-using-postfix-dovecot-mysql-and-spamassassin-a/1248470#1248470
 
+
+This is how is solved it (it took 7 months):
+
+```bash
+apt install dovecot-sieve dovecot-managesieved
+nano /etc/dovecot/conf.d/90-plugin.conf
+```
+
+Add or set in:
+----
+```text
+protocol lmtp {
+        mail_plugins = $mail_plugins sieve
+        auth_socket_path = /var/run/dovecot/auth-master
+    }  
+```
+---- 
+	
+```text
+nano /etc/dovecot/sieve.conf
+```
+
+Add in:
+
+```text
+require ["fileinto", "mailbox"];
+    if header :contains "X-Spam-Flag" "YES" {
+        # move mail into Folder Spam, create folder if not exists
+        fileinto :create "Spam";
+        stop;
+    }
+```
+
+Execute:
+
+```bash
+sievec /etc/dovecot/sieve.conf
+nano /etc/spamassassin/local.cf
+```
+
+
+Add in or set it, it's like this ( I think you don't need everythign else):
+
+```text
+report_safe             0
+required_score          2.0
+use_bayes               1
+use_bayes_rules         1
+bayes_auto_learn        1
+skip_rbl_checks         0
+use_razor2              1
+use_pyzor               0
+
+add_header all Status _YESNO_, score=_SCORE_ required=_REQD_ version=_VERSION_
+bayes_ignore_header X-Bogosity
+bayes_ignore_header X-Spam-Flag
+bayes_ignore_header X-Spam-Status
+```
+	
+----
+
+Edit a new file again:
+
+```bash
+nano /etc/dovecot/conf.d/90-sieve.conf
+```
+
+Set this config, you don't need anything else:
+
+```text
+plugin {
+    sieve = /etc/dovecot/sieve.conf
+}
+```
+ 		
+---
+
+Edit the mail boxes, so jo have Junk, I think jo just need add or uncomment the Junk setting:
+
+```bash
+nano /etc/dovecot/conf.d/15-mailboxes.conf 
+```
+
+Add in this config:
+
+```text
+namespace inbox {
+  mailbox Drafts {
+    auto = subscribe
+    special_use = \Drafts
+  }
+  mailbox Junk {
+    auto = subscribe
+    special_use = \Junk
+  }
+  mailbox Trash {
+    auto = subscribe
+    special_use = \Trash
+  }
+  mailbox Sent {
+    auto = subscribe
+    special_use = \Sent
+  }
+}
+```
+
+---
+
+My user for the e-mail server is ```vmail```, so do like this:
+
+```
+chmod ug+w /etc/dovecot
+chmod ug+w /etc/dovecot/sieve.conf.svbin
+```
+
+```chown -R vmail:vmail /etc/dovecot```
+
+Restart your mail server:
+
+```bash
+service postfix reload && service spamassassin restart && service dovecot restart
+```
+
 # WINDOWS
 
 ## IIS Windows 10 Enterprise
@@ -221,7 +344,7 @@ zend_extension=C:\php\xdebug\php_xdebug-2.7.0alpha1-7.2-vc15-nts-x86_64.dll
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.302-484 
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.305-492 
 
 [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) [![Donate for Corifeus / P3X](https://img.shields.io/badge/Donate-Corifeus-003087.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QZVM4V6HVZJW6)  [![Contact Corifeus / P3X](https://img.shields.io/badge/Contact-P3X-ff9900.svg)](https://www.patrikx3.com/en/front/contact) 
 
