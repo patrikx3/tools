@@ -3,10 +3,13 @@
 [![NPM](https://nodei.co/npm/p3x-tools.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/p3x-tools/)
 
   [![Build Status](https://travis-ci.org/patrikx3/tools.svg?branch=master)](https://travis-ci.org/patrikx3/tools) 
+[![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m780749701-41bcade28c1ea8154eda7cca.svg)](https://uptimerobot.patrikx3.com/)
+
+ 
 
 
  
-# 💣 Tools v1.3.305-492  
+# 💣 Tools v1.3.309-502  
 
 This is an open-source project. Star this repository, if you like it, or even donate! Thank you so much! :)
 
@@ -23,7 +26,7 @@ All my domains (patrikx3.com and corifeus.com) could have errors, since I am dev
    
 ### Built on Node 
 ``` 
-v10.6.0
+v10.8.0
 ```   
    
 The ```async``` and ```await``` keywords are required.
@@ -183,6 +186,18 @@ Update:
 sudo update-grub
 ```
 
+Edit:  
+```bash
+touch /etc/sysctl.d/90-swappiness.conf
+nano /etc/sysctl.d/90-swappiness.conf
+```
+
+```text
+vm.swappiness=1
+```
+
+**sudo reboot**
+
 # How To Configure a Mail Server Using Postfix, Dovecot, MySQL, and SpamAssassin and Sieve to move to Spam / Junk folder
 
 https://superuser.com/questions/1248257/how-to-configure-a-mail-server-using-postfix-dovecot-mysql-and-spamassassin-a/1248470#1248470
@@ -195,21 +210,21 @@ apt install dovecot-sieve dovecot-managesieved
 nano /etc/dovecot/conf.d/90-plugin.conf
 ```
 
-Add or set in:
-----
+## Add or set in:
+
 ```text
 protocol lmtp {
         mail_plugins = $mail_plugins sieve
         auth_socket_path = /var/run/dovecot/auth-master
     }  
 ```
----- 
+
 	
 ```text
 nano /etc/dovecot/sieve.conf
 ```
 
-Add in:
+## Add in
 
 ```text
 require ["fileinto", "mailbox"];
@@ -220,7 +235,7 @@ require ["fileinto", "mailbox"];
     }
 ```
 
-Execute:
+## Execute
 
 ```bash
 sievec /etc/dovecot/sieve.conf
@@ -246,9 +261,7 @@ bayes_ignore_header X-Spam-Flag
 bayes_ignore_header X-Spam-Status
 ```
 	
-----
-
-Edit a new file again:
+## Edit a new file again
 
 ```bash
 nano /etc/dovecot/conf.d/90-sieve.conf
@@ -262,15 +275,13 @@ plugin {
 }
 ```
  		
----
-
 Edit the mail boxes, so jo have Junk, I think jo just need add or uncomment the Junk setting:
 
 ```bash
 nano /etc/dovecot/conf.d/15-mailboxes.conf 
 ```
 
-Add in this config:
+## Add in this config
 
 ```text
 namespace inbox {
@@ -293,8 +304,6 @@ namespace inbox {
 }
 ```
 
----
-
 My user for the e-mail server is ```vmail```, so do like this:
 
 ```
@@ -310,10 +319,30 @@ Restart your mail server:
 service postfix reload && service spamassassin restart && service dovecot restart
 ```
 
+# GRUB for another menu once
+Make sure `/etc/default/grub` has this:
+```text
+GRUB_DEFAULT=saved`
+```
+
+You can choose you menu like:
+```bash
+grep -i "menuentry '" /boot/grub/grub.cfg
+```
+
+The boot with your menu:
+```bash
+sudo -i
+# my workstation boot from win
+grub-reboot 2 
+reboot
+```
+
+
 # WINDOWS
 
 ## IIS Windows 10 Enterprise
-For `IIS`, I have to use the current user `Domain user` both the web site and the application pools.
+For `IIS`, I have to use the current user `Domain user` both the web site and the application pools eg. `domain\user`.
   
 We have to install the `urlrewrite2` module, I think it is here:
 https://www.iis.net/downloads/microsoft/url-rewrite 
@@ -344,7 +373,7 @@ zend_extension=C:\php\xdebug\php_xdebug-2.7.0alpha1-7.2-vc15-nts-x86_64.dll
 
 ---
 
-[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.305-492 
+[**P3X-TOOLS**](https://pages.corifeus.com/tools) Build v1.3.309-502 
 
 [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software) [![Donate for Corifeus / P3X](https://img.shields.io/badge/Donate-Corifeus-003087.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QZVM4V6HVZJW6)  [![Contact Corifeus / P3X](https://img.shields.io/badge/Contact-P3X-ff9900.svg)](https://www.patrikx3.com/en/front/contact) 
 

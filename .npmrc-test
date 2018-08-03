@@ -1,0 +1,5 @@
+registry=http://192.168.78.20:4873/
+ca=null
+strict-ssl=false
+
+
