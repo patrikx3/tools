@@ -20,7 +20,7 @@ commander
 `)
     .option('-d, --dry', 'Do not actually remove packages, just show what it does')
     .option('-u, --user [user]', 'The GitHub repo, default is patrikx3')
-    .option('-n, --note [note]', 'The note in the commit, the default is p3x-robot sunday release')
+    .option('-n, --note [note]', 'The note in the commit, the default is robo8x chore')
     .option('-p, --password [password]', 'The GitHub password or token')
     .option('-b, --branch <branch>', 'The default branch is master')
     .option('-g, --git <git>', 'The GIT repo, example is https://user:password@git.patrikx3.com/')
@@ -33,7 +33,7 @@ commander
     .action(async function (command, options) {
         const user = options.user || 'patrikx3';
         const gitUrl = options.git || 'https://git.patrikx3.com' ;
-        const note = options.note || 'p3x-robot sunday release'
+        const note = options.note || 'robo8x (chore)'
         const branch = options.branch || 'master';
 
         const exclude = options.exclude || defaultGithubExcludes
