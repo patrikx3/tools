@@ -33,7 +33,7 @@ commander
     .action(async function (command, options) {
         const user = options.user || 'patrikx3';
         const gitUrl = options.git || 'https://git.patrikx3.com' ;
-        const note = options.note || 'robo8x  '
+        const note = options.note || 'robo8x [chore]  '
         const branch = options.branch || 'master';
 
         const exclude = options.exclude || defaultGithubExcludes
