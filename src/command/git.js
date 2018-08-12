@@ -103,7 +103,7 @@ chmod +x ${name}/hooks/post-update`, true)
                                     findData: findData,
                                     options: options,
                                     command:  `git add .
-git commit -am 'robo8x (chore)' || true
+git commit -am 'robo8x  ' || true
 git push || true
 ${plusCommands === '' ? 'true' : plusCommands}`,
                                 })
