@@ -7,7 +7,13 @@
     "zone.js",
     "typescript",
     "bootswatch",
-    "bootstrap"
+    "bootstrap",
+    "css-loader"
+  ],
+  "css-loader-in": [
+    "corifeus-builder-angular",
+    "gitlist",
+    "redis-ui-material"
   ],
   "not-keep": [
     "core-js",
