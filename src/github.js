@@ -9,6 +9,10 @@ const git = require('./git');
 
 const list = async(options) => {
     const {only, user , exclude } = options;
+    let { disableArchived } = options
+    if (disableArchived === undefined) {
+        disableArchived = false;
+    }
     const gh = new GitHub();
     const response = await gh.getUser(user).listRepos();
     const repos = response.data
@@ -18,6 +22,9 @@ const list = async(options) => {
             isOnly = only.includes(repo.name)
         } else {
             isOnly = true;
+        }
+        if (disableArchived === true && repo.archived === true) {
+            isOnly = false;
         }
         return repo.full_name === `${user}/${repo.name}` && !exclude.includes(repo.name) && isOnly;
     });
@@ -33,7 +40,8 @@ const mirror = async(options) => {
         const repos = await list({
             user: user,
             exclude: exclude,
-            only: only
+            only: only,
+            disableArchived: true
         });
 
         await repos.forEachAsync(async(repo) => {

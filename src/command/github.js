@@ -50,6 +50,17 @@ GIT_NAME=$(basename \`git rev-parse --show-toplevel\`)
 git pull https://github.com/patrikx3/$GIT_NAME ${branch}`, true);
                 break;
 
+            case 'list':
+
+
+                const repos = await github.list({
+                    user: user,
+                    exclude: exclude,
+                    only: options.only
+                });
+                console.log(repos)
+                break;
+
             case 'mirror':
 
                 if (options.password === undefined) {
