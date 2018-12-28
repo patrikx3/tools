@@ -1,12 +1,47 @@
 const utils = require('corifeus-utils');
 const progress = require('progress');
 
+const dependenciesFix = require('../dependencies-fix.json');
+
+const dependenciesFixAddon = (options) => {
+    const { repo }= options
+    let exclude = dependenciesFix.keep || [];
+
+    if (dependenciesFix.hasOwnProperty('keep-by-repo') && dependenciesFix['keep-by-repo'].hasOwnProperty(repo)) {
+        exclude = exclude.concat(dependenciesFix['keep-by-repo'][repo])
+    }
+    let excludeAddon = '';
+    if (exclude.length > 0) {
+        excludeAddon = `-x ${exclude.join(',')}`
+    }
+    return excludeAddon;
+}
+
+const getNcu = (options) => {
+    if (options.disableNcu === true) {
+        return '';
+    }
+    return `ncu ${options.all ? '-a -u' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
+}
 
 const executeCommandByPath = async (options) => {
 
+    // commander options: options.options
+
     const {
-        findData, command, errors, bar
+        findData,   errors, bar
     } = options;
+
+    let { command } = options
+
+    if (command.includes('__NCU__')) {
+        const ncu = getNcu({
+            all: true,
+            disableNcu: options.options.disableNcu,
+            repo: options.item.pkg.corifeus === undefined ? options.item.pkg.name : options.item.pkg.corifeus.reponame
+        })
+        command = command.replace('__NCU__', ncu)
+    }
 
     const name = options.item ? options.item.name : command;
 
@@ -16,6 +51,7 @@ const executeCommandByPath = async (options) => {
         console.info('------------------------------------');
         console.info(findData.path);
         console.info(name);
+       // console.info(options.item.pkg.corifeus.reponame);
         console.info(command)
         console.info();
 

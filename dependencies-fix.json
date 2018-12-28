@@ -1,42 +1,19 @@
 {
   "keep": [
-    "core-js",
-    "reflect-metadata",
-    "rxjs",
-    "tslib",
-    "zone.js",
-    "typescript",
-    "bootswatch",
-    "bootstrap"
   ],
-  "not-keep": [
-    "core-js",
-    "reflect-metadata",
-    "rxjs",
-    "tslib",
-    "zone.js",
-    "typescript",
-
-    "@ngtools/webpack",
-    "tslib",
-    "typescript",
-    "clear",
-    "github-api",
-    "grunt-contrib-less"
-  ],
-  "always-works-now": {
-    "@ngtools/webpack": "=1.8.0",
-    "core-js": "^2.5.3",
-    "reflect-metadata": "^0.1.3",
-    "rxjs": "5.5.5",
-    "tslib": "^1.7.1",
-    "zone.js": "^0.8.12",
-    "typescript": "2.7.x",
-    "clear": "^0.1.0",
-    "github-api": "3.0.0"
-  },
-  "errored": {
-    "@ngtools/webpack": "corifeus-builder-angular has a hack to remove the remove decorators"
+  "keep-by-repo": {
+    "gitlist": [
+      "bootswatch",
+      "bootstrap"
+    ],
+    "corifeus-builder-angular":  [
+      "core-js",
+      "reflect-metadata",
+      "rxjs",
+      "tslib",
+      "zone.js",
+      "typescript"
+    ]
   },
   "disable-update": [
   ]

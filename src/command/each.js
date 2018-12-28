@@ -78,28 +78,12 @@ const getPkgAndDeps = async(file) => {
     }
 }
 
-const dependenciesFixAddon = () => {
-    const exclude = dependenciesFix.keep || [];
-    let excludeAddon = '';
-    if (exclude.length > 0) {
-        excludeAddon = `-x ${exclude.join(',')}`
-    }
-    return excludeAddon;
-}
-
-const getNcu = (options) => {
-    if (options.disableNcu === true) {
-        return '';
-    }
-    return `ncu ${options.all ? '-a -u' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon()}`
-}
-
 const executeCommand = async (command, plusCommands, options) => {
     let errors = [];
     plusCommands = plusCommands.join(' ').trim();
 
     if (plusCommands === 'ncu') {
-        plusCommands += `  --loglevel verbose --packageFile package.json ${dependenciesFixAddon()}`
+        plusCommands = `__NCU__`
     }
 
 
@@ -219,7 +203,7 @@ yarn link
 
     if (plusCommands === 'start') {
         plusCommands = `sudo echo "SUDO IS DONE"
-${getNcu({all: true, disableNcu: options.disableNcu})}
+__NCU__
 npm install --non-interactive
 ${npmLib.command.publish({ all: options.all } )}`;
     }
@@ -228,7 +212,8 @@ ${npmLib.command.publish({ all: options.all } )}`;
     let doActualExecute = false;
     const displayCommand = `${command} ${plusCommands}`;
     let bar;
-    if (options.disableProgress !== true) {
+
+    if (options.disableProgress !== true && list.length > 0) {
         bar = lib.newProgress(command, list);
     }
     let remained = [];
@@ -312,7 +297,7 @@ ${npmLib.command.publish({ all: options.all } )}`;
                 case 'publish':
                     if (options.disableNcu !== true) {
                         execCommand = `
-${getNcu({all: true, disableNcu: options.disableNcu})}
+__NCU__
 npm install --non-interactive
 `;
 
@@ -360,6 +345,6 @@ yarn link ${item.wants.join(' \nyarn link ')}
     console.info(displayCommand)
 
     console.info();
-    console.info('Dependencies fix', JSON.stringify(dependenciesFix, null, 4))
+    //console.info('Dependencies fix', JSON.stringify(dependenciesFix, null, 4))
 
 }
