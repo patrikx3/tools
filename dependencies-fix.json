@@ -2,11 +2,14 @@
   "keep": [
   ],
   "keep-by-repo": {
+    "onenote2": [
+      "electron"
+    ],
     "gitlist": [
       "bootswatch",
       "bootstrap"
     ],
-    "corifeus-builder-angular":  [
+    "corifeus-builder-angular": [
       "core-js",
       "reflect-metadata",
       "rxjs",
