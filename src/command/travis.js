@@ -22,7 +22,7 @@ commander
           make sure you are logged in travis.
 `)
     .option('-s, --serial', 'Serial ')
-    .option('-p, --pro', 'Use the PRO environment')
+    .option('-o, --org', 'Use the ORG environment')
     .action(async function (commands, options) {
 
         switch (commands[0]) {
@@ -81,7 +81,7 @@ commander
                             await mz.fs.writeFile(file, newTravisYml)
                         }
                         const travisSecureCommand = `bash -c 'pushd ${dir}                    
-travis encrypt 'GITHUB_TOKEN=${githubToken}' -r ${repo}/${repoName} --add ${options.pro ? '--pro' : '--org'}
+travis encrypt 'GITHUB_TOKEN=${githubToken}' -r ${repo}/${repoName} --add ${options.org ? '--org' : '--pro'}
 cat .travis.yml
 popd
 '
