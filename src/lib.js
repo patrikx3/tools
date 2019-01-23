@@ -106,18 +106,20 @@ popd
         }
         throw e;
     } finally {
+        /*
         if (bar) {
             bar.tick({
                 token: name
             })
         }
+        */
     }
 }
 
 const newProgress = (status, list) => {
     const bar = new progress(`${status}[:bar] :token`, {
-        total: list.length  * 2,
-        width: Math.min(list.length * 2, 20) ,
+        total: list.length,
+        width: Math.min(list.length, 20) ,
         complete: '=',
         incomplete: '-',
         clear: true

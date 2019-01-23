@@ -238,10 +238,8 @@ ${npmLib.command.publish({ all: options.all } )}`;
                 case 'list':
                     console.info(pkg.name)
                     if (options.disableProgress !== true) {
-                        utils.repeat(2, () => {
-                            bar.tick({
-                                token: pkg.name
-                            })
+                        bar.tick({
+                            token: pkg.name
                         })
                     }
                     break;
@@ -264,10 +262,8 @@ ${npmLib.command.publish({ all: options.all } )}`;
             }
         } else {
             if (options.disableProgress !== true) {
-                utils.repeat(2, () => {
-                    bar.tick({
-                        token: pkg.name
-                    })
+                bar.tick({
+                    token: pkg.name
                 })
             }
             remained.push(item);
