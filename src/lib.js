@@ -21,7 +21,10 @@ const getNcu = (options) => {
     if (options.disableNcu === true) {
         return '';
     }
-    return `ncu ${options.all ? '-a -u' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
+//    const command = `ncu ${options.all ? '-u -a' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
+//    return
+    const command = `ncu ${options.all ? '-u' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
+    return command
 }
 
 const executeCommandByPath = async (options) => {
@@ -41,6 +44,7 @@ const executeCommandByPath = async (options) => {
             repo: options.item.pkg.corifeus === undefined ? options.item.pkg.name : options.item.pkg.corifeus.reponame
         })
         command = command.replace('__NCU__', ncu)
+      //  console.warn('command', command)
     }
 
     const name = options.item ? options.item.name : command;

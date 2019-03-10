@@ -99,7 +99,7 @@ const executeCommand = async (command, plusCommands, options) => {
         plusCommands += ' --packageManager ' + options.packageManager
     }
 
-    if (options.all && plusCommands !== 'start') {
+    if (options.all && plusCommands !== 'start' && plusCommands !== '__NCU__') {
         plusCommands += ' -a'
     }
 
