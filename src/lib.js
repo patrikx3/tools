@@ -7,6 +7,7 @@ const dependenciesFixAddon = (options) => {
     const { repo }= options
     let exclude = dependenciesFix.keep || [];
 
+
     if (dependenciesFix.hasOwnProperty('keep-by-repo') && dependenciesFix['keep-by-repo'].hasOwnProperty(repo)) {
         exclude = exclude.concat(dependenciesFix['keep-by-repo'][repo])
     }

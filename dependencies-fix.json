@@ -16,6 +16,9 @@
       "tslib",
       "zone.js",
       "typescript"
+    ],
+    "play-ai-ui": [
+      "@tensorflow/tfjs"
     ]
   },
   "disable-update": [
