@@ -24,7 +24,7 @@ const getNcu = (options) => {
     }
 //    const command = `ncu ${options.all ? '-u -a' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
 //    return
-    const command = `ncu ${options.all ? '-u' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
+    const command = `ncu ${options.all ? '-u' : ''} --pre 999999 --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
     return command
 }
 
@@ -40,7 +40,7 @@ const executeCommandByPath = async (options) => {
 
     if (command.includes('__NCU__')) {
         const ncu = getNcu({
-            all: true,
+            all: options.options.all,
             disableNcu: options.options.disableNcu,
             repo: options.item.pkg.corifeus === undefined ? options.item.pkg.name : options.item.pkg.corifeus.reponame
         })
@@ -135,6 +135,12 @@ const newProgress = (status, list) => {
     return bar;
 }
 
+const hackNpmInstallPreHook = () => {
+    return `rm node_modules/angular-material/.git/ -rf`
+}
+
 module.exports.newProgress = newProgress;
 
 module.exports.executeCommandByPath = executeCommandByPath;
+
+module.exports.hackNpmInstallPreHook = hackNpmInstallPreHook;

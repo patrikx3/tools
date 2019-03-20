@@ -1,6 +1,6 @@
 {
     "name": "p3x-tools",
-    "version": "2019.3.18-2",
+    "version": "2019.4.5",
     "corifeus": {
         "prefix": "p3x-",
         "publish": true,
@@ -38,11 +38,11 @@
     },
     "homepage": "https://pages.corifeus.com/tools",
     "devDependencies": {
-        "corifeus-builder": "^2019.3.10-1"
+        "corifeus-builder": "^2019.4.6"
     },
     "dependencies": {
         "commander": "^2.19.0",
-        "corifeus-utils": "^2019.3.10-1",
+        "corifeus-utils": "^2019.4.6",
         "fs-extra": "^7.0.1",
         "github-api": "^3.0.0",
         "globby": "^9.1.0",
