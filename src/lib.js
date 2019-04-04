@@ -24,7 +24,7 @@ const getNcu = (options) => {
     }
 //    const command = `ncu ${options.all ? '-u -a' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
 //    return
-    const command = `ncu ${options.all ? '-u' : ''} --pre 999999 --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
+    const command = `ncu ${options.all ? '-u' : ''} --loglevel verbose --packageFile package.json ${dependenciesFixAddon(options)}`
     return command
 }
 
