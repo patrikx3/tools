@@ -136,7 +136,7 @@ const newProgress = (status, list) => {
 }
 
 const hackNpmInstallPreHook = () => {
-    return `rm node_modules/angular-material/.git/ -rf`
+    return ``
 }
 
 module.exports.newProgress = newProgress;
