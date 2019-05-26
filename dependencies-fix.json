@@ -2,7 +2,10 @@
   "keep": [
   ],
   "keep-by-repo": {
-    "onenote2": [
+    "onenote": [
+      "electron"
+    ],
+    "redis-ui": [
       "electron"
     ],
     "gitlist": [
