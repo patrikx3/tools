@@ -12,6 +12,8 @@
       "bootswatch",
       "bootstrap"
     ],
+    "corifeus-app-web-pages": [
+    ],
     "corifeus-builder-angular": [
       "core-js",
       "reflect-metadata",
