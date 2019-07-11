@@ -45,7 +45,7 @@ popd
             if (dry) {
                 console.info(`Dirs`, path)
 //                console.log(generatedCommand);
-            } else  {
+            } else {
                 const run = utils.childProcess.exec(generatedCommand);
                 run.exec.stdout.on('data', (data) => {
                     console.info(data);

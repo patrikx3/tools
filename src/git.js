@@ -22,7 +22,7 @@ git push -f origin master`
     }
 }
 
-const findModules = async(root) => {
+const findModules = async (root) => {
     const modules = await globby(`${root}/**/.gitmodules`);
     return modules.map((dir) => {
         return path.dirname(dir);

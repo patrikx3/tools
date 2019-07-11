@@ -38,7 +38,7 @@ commander
 
         plusCommands = plusCommands.join(' ').trim();
 
-        switch(command) {
+        switch (command) {
 
             case 'init':
 
@@ -93,18 +93,18 @@ chmod +x ${name}/hooks/post-update`, true)
                         break;
 
                     case 'list':
-                        for(let pathItem of paths) {
-                            console.log(path.basename(pathItem  .dir));
+                        for (let pathItem of paths) {
+                            console.log(path.basename(pathItem.dir));
                         }
                         break;
 
                     case 'push':
                         await paths.forEachAsync(async (findData) => {
-                            await utils.repeat.async(2, async() => {
+                            await utils.repeat.async(2, async () => {
                                 await lib.executeCommandByPath({
                                     findData: findData,
                                     options: options,
-                                    command:  `git add .
+                                    command: `git add .
 git commit -am robo8x || true 
 git push || true
 ${plusCommands === '' ? 'true' : plusCommands}`,

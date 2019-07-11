@@ -32,7 +32,7 @@ commander
     })
     .action(async function (command, options) {
         const user = options.user || 'patrikx3';
-        const gitUrl = options.git || 'https://git.patrikx3.com' ;
+        const gitUrl = options.git || 'https://git.patrikx3.com';
         const note = options.note || 'robo8x [chore]  '
         const branch = options.branch || 'master';
 
@@ -42,7 +42,7 @@ commander
         console.info(`Git url: ${gitUrl}`);
         console.info(`Note: ${note}`);
 
-        switch(command) {
+        switch (command) {
             case 'pull':
 
                 await utils.childProcess.exec(`

@@ -23,10 +23,10 @@ commander
         ${commands.join(', ')}
 
 `)
-    .option('-u, --username [username]', 'Author username, defaults to patrikx3',  (val) => {
+    .option('-u, --username [username]', 'Author username, defaults to patrikx3', (val) => {
         return val.split(',');
     })
-    .option('-s, --search [term]', `Search for the given packages, the default is 'p3x,corifeus`,  (val) => {
+    .option('-s, --search [term]', `Search for the given packages, the default is 'p3x,corifeus`, (val) => {
         return val.split(',');
     })
     .option('-a, --all')
@@ -45,7 +45,7 @@ commander
         const dry = options.dry || false;
         const all = options.all || false;
 
-        switch(command) {
+        switch (command) {
 
             case 'update':
                 if (await mz.fs.exists('./package.json')) {

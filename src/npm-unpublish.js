@@ -6,7 +6,7 @@ const path = require('path')
 const exec = require('child_process').exec;
 const repo = process.argv[2];
 
-const removeVersion = (repo, version, keptVersions, dry, all)  => {
+const removeVersion = (repo, version, keptVersions, dry, all) => {
     const semVersion = version.split('.');
 
     if (!all) {
@@ -48,7 +48,7 @@ const removeVersion = (repo, version, keptVersions, dry, all)  => {
 
 const findVersions = async (repo) => {
     return new Promise((resolve, reject) => {
-        exec(`npm show ${repo} --json`,  async(e, stdout, stderr) => {
+        exec(`npm show ${repo} --json`, async (e, stdout, stderr) => {
             if (e) {
                 console.error(e);
                 reject(e);
@@ -68,7 +68,7 @@ const removePackage = async (repo, dry, all) => {
     const versions = await findVersions(repo);
     const keptVersions = {}
     if (Object.keys(versions).length > 1) {
-        for(let version of versions) {
+        for (let version of versions) {
             await removeVersion(repo, version, keptVersions, dry, all);
         }
     }
@@ -94,7 +94,7 @@ Unpublish
 ----------------------------------------------
 Usernames: ${usernames.join(', ')}
 Search: ${search.join(', ')}
-Packages: ${isAll   ? 'all' : packages.join(', ')}
+Packages: ${isAll ? 'all' : packages.join(', ')}
 Dry: ${dry}
 `)
 
@@ -103,12 +103,12 @@ Dry: ${dry}
     const promises = [];
 
     const createLog = (repo, dry) => {
-        return new Promise(async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             try {
                 const log = await removePackage(repo, dry, all);
                 logs.push(log);
                 resolve();
-            } catch(e) {
+            } catch (e) {
                 reject(e);
             }
         })
@@ -129,7 +129,7 @@ Dry: ${dry}
         results.forEach(result => {
             objects = objects.concat(result.body.objects)
         })
-        objects = objects .filter((obj) => {
+        objects = objects.filter((obj) => {
             if (!obj.package.hasOwnProperty('author')) {
                 errorLogs.push({
                     pkg: obj.package,

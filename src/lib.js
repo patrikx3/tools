@@ -4,7 +4,7 @@ const progress = require('progress');
 const dependenciesFix = require('../dependencies-fix.json');
 
 const dependenciesFixAddon = (options) => {
-    const { repo }= options
+    const {repo} = options
     let exclude = dependenciesFix.keep || [];
 
 
@@ -33,10 +33,10 @@ const executeCommandByPath = async (options) => {
     // commander options: options.options
 
     const {
-        findData,   errors, bar
+        findData, errors, bar
     } = options;
 
-    let { command } = options
+    let {command} = options
 
     if (command.includes('__NCU__')) {
         const ncu = getNcu({
@@ -45,7 +45,7 @@ const executeCommandByPath = async (options) => {
             repo: options.item.pkg.corifeus === undefined ? options.item.pkg.name : options.item.pkg.corifeus.reponame
         })
         command = command.replace('__NCU__', ncu)
-      //  console.warn('command', command)
+        //  console.warn('command', command)
     }
 
     const name = options.item ? options.item.name : command;
@@ -56,7 +56,7 @@ const executeCommandByPath = async (options) => {
         console.info('------------------------------------');
         console.info(findData.path);
         console.info(name);
-       // console.info(options.item.pkg.corifeus.reponame);
+        // console.info(options.item.pkg.corifeus.reponame);
         console.info(command)
         console.info();
 
@@ -124,7 +124,7 @@ popd
 const newProgress = (status, list) => {
     const bar = new progress(`${status}[:bar] :token`, {
         total: list.length,
-        width: Math.min(list.length, 20) ,
+        width: Math.min(list.length, 20),
         complete: '=',
         incomplete: '-',
         clear: true

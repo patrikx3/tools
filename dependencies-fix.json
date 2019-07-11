@@ -1,31 +1,32 @@
 {
-  "keep": [
-  ],
-  "keep-by-repo": {
-    "onenote": [
-      "electron"
+    "keep": [
     ],
-    "redis-ui": [
-      "electron"
-    ],
-    "gitlist": [
-      "bootswatch",
-      "bootstrap"
-    ],
-    "corifeus-app-web-pages": [
-    ],
-    "corifeus-builder-angular": [
-      "core-js",
-      "reflect-metadata",
-      "rxjs",
-      "tslib",
-      "zone.js",
-      "typescript"
-    ],
-    "play-ai-ui": [
-      "@tensorflow/tfjs"
+    "keep-by-repo": {
+        "corifeus-app-server-patrikx3": [
+        ],
+        "onenote": [
+            "electron",
+            "configstore"
+        ],
+        "redis-ui": [
+            "electron",
+            "configstore"
+        ],
+        "gitlist": [
+            "bootswatch",
+            "bootstrap"
+        ],
+        "corifeus-app-web-pages": [
+        ],
+        "corifeus-builder-angular": [
+            "core-js",
+            "reflect-metadata",
+            "rxjs",
+            "tslib",
+            "zone.js",
+            "typescript"
+        ]
+    },
+    "disable-update": [
     ]
-  },
-  "disable-update": [
-  ]
 }

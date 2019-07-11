@@ -20,7 +20,7 @@ commander
                 break;
 
             default:
-                url  = `http://localhost:23502/status`;
+                url = `http://localhost:23502/status`;
                 break;
         }
         const response = await utils.http.request({

@@ -2,7 +2,7 @@
 //const fsExtra = require('fs-extra');
 const mz = require('mz');
 
-const pdf = async(file) => {
+const pdf = async (file) => {
     const buffer = await mz.fs.readFile(file);
     const doc = await pdfjs.getDocument(buffer);
 

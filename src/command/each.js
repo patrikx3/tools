@@ -64,13 +64,13 @@ const loadCommander = (command) => {
 
 allCommands.forEach((cmd) => loadCommander(cmd))
 
-const getPkgAndDeps = async(file) => {
+const getPkgAndDeps = async (file) => {
     const data = (await mz.fs.readFile(file)).toString();
     try {
         const pkg = JSON.parse(data);
         let deps = Object.keys(Object.assign(pkg.dependencies || {}, pkg.devDependencies || {}));
         return [pkg, deps];
-    } catch(e) {
+    } catch (e) {
         console.error();
         console.error(file);
         console.error();
@@ -150,7 +150,7 @@ const executeCommand = async (command, plusCommands, options) => {
             return item.pkg.name;
         })
         allList = allList.filter(item => {
-            for(let masterItemName of allListFilter) {
+            for (let masterItemName of allListFilter) {
                 if (item.pkg.name === masterItemName) {
                     return true;
                 }
@@ -185,7 +185,7 @@ const executeCommand = async (command, plusCommands, options) => {
         })
     }
 
-    switch(command) {
+    switch (command) {
         case 'publish':
             options.serial = true;
             break;
@@ -206,7 +206,7 @@ yarn link
 __NCU__
 ${lib.hackNpmInstallPreHook()}
 npm install --non-interactive
-${npmLib.command.publish({ all: options.all } )}`;
+${npmLib.command.publish({all: options.all})}`;
     }
 
     const actual = [];
@@ -219,7 +219,7 @@ ${npmLib.command.publish({ all: options.all } )}`;
     }
     let remained = [];
     await list.forEachAsync(async (item) => {
-        const {findData , pkg, deps} = item;
+        const {findData, pkg, deps} = item;
         let hasBuilder;
 
         if (pkg.name !== undefined && pkg.name.startsWith('corifeus-builder')) {
@@ -231,7 +231,7 @@ ${npmLib.command.publish({ all: options.all } )}`;
         } else {
             hasBuilder = true;
         }
-        if (hasBuilder !== undefined ) {
+        if (hasBuilder !== undefined) {
             actual.push(item);
             switch (plusCommands) {
                 case 'count':
@@ -253,10 +253,10 @@ ${npmLib.command.publish({ all: options.all } )}`;
                     await lib.executeCommandByPath({
                         findData: findData,
                         command: plusCommands,
-                        errors:  errors,
+                        errors: errors,
                         item: item,
                         options: options,
-                        bar : bar
+                        bar: bar
                     })
                     await read(options, bar)
 
@@ -287,10 +287,10 @@ ${npmLib.command.publish({ all: options.all } )}`;
         const afterBar = lib.newProgress(`post ${command}`, allList);
 
         await allList.forEachAsync(async (item) => {
-            const {findData , pkg, deps} = item;
+            const {findData, pkg, deps} = item;
 
             let execCommand;
-            switch(command) {
+            switch (command) {
                 case 'publish':
                     if (options.disableNcu !== true) {
                         execCommand = `
@@ -315,14 +315,14 @@ yarn link ${item.wants.join(' \nyarn link ')}
                 await lib.executeCommandByPath({
                     findData: findData,
                     command: execCommand,
-                    errors:  errors,
+                    errors: errors,
                     item: item,
                     options: options,
-                    bar : afterBar
+                    bar: afterBar
                 })
                 await read(options, afterBar)
             }
-        }, options.serial )
+        }, options.serial)
     }
 
     console.info(`All: ${allList.map((item) => item.name)}`)

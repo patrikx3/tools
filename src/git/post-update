@@ -3,9 +3,9 @@
 // this is in server-scripts as well
 const url = require('url');
 
-const request =  (options) => {
+const request = (options) => {
 
-    if (typeof(options) === 'string') {
+    if (typeof (options) === 'string') {
         options = {
             url: options,
             method: 'GET',
@@ -37,7 +37,7 @@ const request =  (options) => {
 
     let body;
     if (options.body !== undefined) {
-        if (typeof(options.body) === 'object') {
+        if (typeof (options.body) === 'object') {
             body = JSON.stringify(options.body);
 
             options.headers = options.headers || {};
@@ -57,7 +57,7 @@ const request =  (options) => {
             });
             res.on('end', () => {
                 try {
-                    if (res.headers.hasOwnProperty('content-type') &&  res.headers['content-type'].startsWith('application/json')) {
+                    if (res.headers.hasOwnProperty('content-type') && res.headers['content-type'].startsWith('application/json')) {
                         const parsedData = JSON.parse(rawData);
                         res.body = parsedData;
                     }
@@ -75,7 +75,7 @@ const request =  (options) => {
     })
 }
 
-const start = async() => {
+const start = async () => {
     try {
         const response = await request({
             url: 'http://localhost:23500/post-update',
@@ -86,7 +86,7 @@ const start = async() => {
             }
         })
         console.log(JSON.stringify(response.body, null, 2));
-    } catch(e) {
+    } catch (e) {
         console.error(e)
     }
 

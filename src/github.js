@@ -7,9 +7,9 @@ const ini = require('ini');
 const url = require('url');
 const git = require('./git');
 
-const list = async(options) => {
-    const {only, user , exclude } = options;
-    let { disableArchived } = options
+const list = async (options) => {
+    const {only, user, exclude} = options;
+    let {disableArchived} = options
     if (disableArchived === undefined) {
         disableArchived = false;
     }
@@ -30,8 +30,8 @@ const list = async(options) => {
     });
 }
 
-const mirror = async(options) => {
-    let { only, user, password, gitUrl, dry, note, exclude } = options;
+const mirror = async (options) => {
+    let {only, user, password, gitUrl, dry, note, exclude} = options;
     let tmpDir;
     const errors = [];
     try {
@@ -44,7 +44,7 @@ const mirror = async(options) => {
             disableArchived: true
         });
 
-        await repos.forEachAsync(async(repo) => {
+        await repos.forEachAsync(async (repo) => {
             await utils.childProcess.exec(`
 git clone --depth 5 https://${user}:${password}@github.com/${user}/${repo.name} ${tmpDir.path}/github/${repo.name}
 cd ${tmpDir.path}/github/${repo.name}
@@ -57,8 +57,8 @@ git submodule update --init --recursive  --remote
         })
 
         console.info('Remove all Git .git dirs and move to Github .git dirs');
-        await repos.forEachAsync(async(repo) => {
-            const currentRepo  = `${tmpDir.path}/git/${repo.name}`;
+        await repos.forEachAsync(async (repo) => {
+            const currentRepo = `${tmpDir.path}/git/${repo.name}`;
             await utils.childProcess.exec(`
 rm -rf ${currentRepo}/.git   
 rm -rf ${currentRepo}/secure
@@ -82,7 +82,7 @@ mv ${tmpDir.path}/git/ ${tmpDir.path}/github/
 
         await replacePkg(`${tmpDir.path}/github`, user);
 
-        await repos.forEachAsync(async(repo) => {
+        await repos.forEachAsync(async (repo) => {
             await utils.childProcess.exec(`
 cd ${tmpDir.path}/github/${repo.name}
 pwd
@@ -91,20 +91,20 @@ git add .
 git status
 `, true)
         })
-        await repos.forEachAsync(async(repo) => {
+        await repos.forEachAsync(async (repo) => {
             try {
                 await utils.childProcess.exec(`
 cd ${tmpDir.path}/github/${repo.name}
 git commit -am "${note} ${new Date().toLocaleString()}"
 ${dry ? 'true' : 'git push'}
 `, true)
-            } catch(e) {
+            } catch (e) {
                 errors.push(e);
             }
         }, true)
 
         const modules = await git.findModules(`${tmpDir.path}/github/`)
-        await modules.forEachAsync(async(module) => {
+        await modules.forEachAsync(async (module) => {
             await utils.childProcess.exec(`
 cd ${module}
 git pull
@@ -117,13 +117,13 @@ ${dry ? 'true' : 'git push'}
         }, true)
 
         console.info('All done')
-    } catch(e ) {
+    } catch (e) {
         errors.push(e);
     } finally {
         if (tmpDir) {
             console.info(`Cleanup tmp file ${tmpDir.path}`);
             if (!dry) {
-                await utils.childProcess.exec(`rm -rf ${tmpDir.path}`,true)
+                await utils.childProcess.exec(`rm -rf ${tmpDir.path}`, true)
             } else {
                 console.info('Dry, not cleanup')
             }
@@ -136,9 +136,9 @@ ${dry ? 'true' : 'git push'}
 }
 
 
-const replacePkg= async(root, user) => {
+const replacePkg = async (root, user) => {
     const files = await globby(`${root}/**/package.json`)
-    await files.forEachAsync(async(file) => {
+    await files.forEachAsync(async (file) => {
         console.info(`package.json ${file}`)
         const string = (await mz.fs.readFile(file)).toString();
         const result = string.replace(/git\.patrikx3\.com\//g, `github.com/${user}/`);
@@ -147,9 +147,9 @@ const replacePkg= async(root, user) => {
     })
 }
 
-const replaceGitSubmodules  = async(root, user) => {
+const replaceGitSubmodules = async (root, user) => {
     const files = await globby(`${root}/**/.gitmodules`)
-    await files.forEachAsync(async(file) => {
+    await files.forEachAsync(async (file) => {
         console.info(`submodule found ${file}`)
         const string = (await mz.fs.readFile(file)).toString();
         const iniFile = ini.parse(string);
@@ -163,13 +163,13 @@ const replaceGitSubmodules  = async(root, user) => {
     })
 }
 
-const replaceInitSh = async(root, gitUrl, user) => {
+const replaceInitSh = async (root, gitUrl, user) => {
 
     const gitUrlObj = url.parse(gitUrl);
     gitUrl = RegExp.escape(`${gitUrlObj.protocol}//${gitUrlObj.hostname}`);
     const gitUrlRegexp = new RegExp(gitUrl, 'ig')
     const files = await globby(`${root}/**/init.sh`)
-    await files.forEachAsync(async(file) => {
+    await files.forEachAsync(async (file) => {
         console.info(`init.sh found ${file}`)
         const string = (await mz.fs.readFile(file)).toString();
         const result = string.replace(gitUrlRegexp, `https://github.com/${user}`)
