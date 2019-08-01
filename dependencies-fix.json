@@ -5,11 +5,9 @@
         "corifeus-app-server-patrikx3": [
         ],
         "onenote": [
-            "electron",
             "configstore"
         ],
         "redis-ui": [
-            "electron",
             "configstore"
         ],
         "gitlist": [
