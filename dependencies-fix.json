@@ -23,6 +23,9 @@
             "tslib",
             "zone.js",
             "typescript"
+        ],
+        "xml2json": [
+            "@hapi/joi"
         ]
     },
     "disable-update": [
