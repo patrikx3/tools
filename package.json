@@ -1,12 +1,12 @@
 {
     "name": "p3x-tools",
-    "version": "2019.10.150",
+    "version": "2019.10.153",
     "corifeus": {
         "prefix": "p3x-",
         "publish": true,
         "type": "p3x",
         "code": "Lazy",
-        "nodejs": "v12.10.0",
+        "nodejs": "v12.11.1",
         "opencollective": false,
         "reponame": "tools",
         "build": true
@@ -38,17 +38,17 @@
     },
     "homepage": "https://pages.corifeus.com/tools",
     "devDependencies": {
-        "corifeus-builder": "^2019.10.246"
+        "corifeus-builder": "^2019.10.249"
     },
     "dependencies": {
         "commander": "^3.0.2",
-        "corifeus-utils": "^2019.10.164",
+        "corifeus-utils": "^2019.10.167",
         "fs-extra": "^8.1.0",
         "github-api": "^3.3.0",
         "globby": "^10.0.1",
         "ini": "^1.3.5",
         "mz": "^2.7.0",
-        "npm-check-updates": "^3.1.23",
+        "npm-check-updates": "^3.1.24",
         "progress": "^2.0.3",
         "tmp-promise": "^2.0.2",
         "yamljs": "^0.3.0"
