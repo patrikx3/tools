@@ -15,7 +15,6 @@
             "bootstrap"
         ],
         "corifeus-app-web-pages": [
-            "marked"
         ],
         "corifeus-builder-angular": [
             "core-js",
