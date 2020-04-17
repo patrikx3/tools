@@ -21,7 +21,6 @@
             "reflect-metadata",
             "rxjs",
             "tslib",
-            "zone.js",
             "typescript"
         ],
         "xml2json": [
