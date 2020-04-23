@@ -9,16 +9,16 @@ commander
     .command('travis [commands...]')
     .description(`
     It is imporant, that before you do anything, install the travis Ruby gem.
-    You need the ruby-dev environment as well, so 
-        apt install ruby-dev        
+    You need the ruby-dev environment as well, so
+        apt install ruby-dev
         gem install travis (gem search travis - specific version)
         travis login
 
         Based on: http://blog.code4hire.com/2016/06/Adding-GitHub-token-to-Travis-CI-configuration/
-    
+
     Commands:
         github-token: Adds a github token to all .travis files, recursively
-          arguments: token or repo token, if you use 1 arguments, it is patrikx3 
+          arguments: token or repo token, if you use 1 arguments, it is patrikx3
           make sure you are logged in travis.
 `)
     .option('-s, --serial', 'Serial ')
@@ -80,7 +80,7 @@ commander
 
                             await mz.fs.writeFile(file, newTravisYml)
                         }
-                        const travisSecureCommand = `bash -c 'pushd ${dir}                    
+                        const travisSecureCommand = `bash -c 'pushd ${dir}
 travis encrypt 'GITHUB_TOKEN=${githubToken}' -r ${repo}/${repoName} --add ${options.org ? '--org' : '--pro'}
 cat .travis.yml
 popd
