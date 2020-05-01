@@ -31,12 +31,13 @@ const getNcu = (options) => {
 const executeCommandByPath = async (options) => {
 
     // commander options: options.options
-
     const {
         findData, errors, bar
     } = options;
 
     let {command} = options
+
+    const noInstall = options && options.item && options.item.pkg && options.item.pkg.corifeus && options.item.pkg.corifeus.install === false
 
     if (command.includes('__NCU__')) {
         const ncu = getNcu({
@@ -47,12 +48,20 @@ const executeCommandByPath = async (options) => {
         command = command.replace('__NCU__', ncu)
         //  console.warn('command', command)
     }
+    if (options && options.item && options.item.pkg && options.item.pkg.corifeus && options.item.pkg.corifeus['publish-location']) {
+        command = command.replace('__PUBLISH_LOCATION_START__', `pushd ${options.item.pkg.corifeus['publish-location']}`)
+        command = command.replace('__PUBLISH_LOCATION_END__', 'popd')
+    } else {
+        command = command.replace('__PUBLISH_LOCATION_START__', '')
+        command = command.replace('__PUBLISH_LOCATION_END__', '')
+
+    }
 
     const name = options.item ? options.item.name : command;
 
     const token = `${name} ${command}`;
 
-    if (options.options.dry) {
+    if (options.options.dry || noInstall) {
         console.info('------------------------------------');
         console.info(findData.path);
         console.info(name);
@@ -79,10 +88,10 @@ const executeCommandByPath = async (options) => {
 
         const execPromise = utils.childProcess.exec(`
 bash -c '
-pushd ${findData.dir}            
+pushd ${findData.dir}
 set -e
-export FOUND_DIR=${findData.dir}                
-export FOUND=${findData.path}                
+export FOUND_DIR=${findData.dir}
+export FOUND=${findData.path}
 ${command}
 popd
 '

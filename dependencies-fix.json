@@ -11,6 +11,7 @@
             "configstore"
         ],
         "gitlist": [
+            "jquery",
             "bootswatch",
             "bootstrap"
         ],

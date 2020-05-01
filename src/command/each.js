@@ -69,6 +69,7 @@ const getPkgAndDeps = async (file) => {
     try {
         const pkg = JSON.parse(data);
         let deps = Object.keys(Object.assign(pkg.dependencies || {}, pkg.devDependencies || {}));
+
         return [pkg, deps];
     } catch (e) {
         console.error();
@@ -185,6 +186,7 @@ const executeCommand = async (command, plusCommands, options) => {
         })
     }
 
+
     switch (command) {
         case 'publish':
             options.serial = true;
@@ -192,7 +194,7 @@ const executeCommand = async (command, plusCommands, options) => {
 
         case 'link':
             plusCommands = `yarn unlink || true
-yarn link            
+yarn link
 `;
             break;
     }
@@ -305,7 +307,7 @@ npm install --non-interactive
                 case 'link':
                     if (item.wants.length > 0) {
                         execCommand = `
-yarn link ${item.wants.join(' \nyarn link ')} 
+yarn link ${item.wants.join(' \nyarn link ')}
 `
                     }
                     break;

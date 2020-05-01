@@ -80,8 +80,9 @@ commander
 
                             await mz.fs.writeFile(file, newTravisYml)
                         }
+// https://github.com/travis-ci/travis.rb/issues/738#issuecomment-620075358 <- GITHUB_TOKEN vs GH_TOKEN
                         const travisSecureCommand = `bash -c 'pushd ${dir}
-travis encrypt 'GITHUB_TOKEN=${githubToken}' -r ${repo}/${repoName} --add ${options.org ? '--org' : '--pro'}
+travis encrypt 'GH_TOKEN=${githubToken}' -r ${repo}/${repoName} --add ${options.org ? '--org' : '--pro'} --no-interactive
 cat .travis.yml
 popd
 '

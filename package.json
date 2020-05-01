@@ -1,12 +1,12 @@
 {
     "name": "p3x-tools",
-    "version": "2020.4.147",
+    "version": "2020.4.150",
     "corifeus": {
         "prefix": "p3x-",
         "publish": true,
         "type": "p3x",
         "code": "Lazy",
-        "nodejs": "v12.16.2",
+        "nodejs": "v12.16.3",
         "opencollective": false,
         "reponame": "tools",
         "build": true
@@ -36,13 +36,13 @@
     "bugs": {
         "url": "https://github.com/patrikx3/tools/issues"
     },
-    "homepage": "https://pages.corifeus.com/tools",
+    "homepage": "https://corifeus.com/tools",
     "devDependencies": {
-        "corifeus-builder": "^2020.4.164"
+        "corifeus-builder": "^2020.4.179"
     },
     "dependencies": {
-        "commander": "^5.0.0",
-        "corifeus-utils": "^2020.4.156",
+        "commander": "^5.1.0",
+        "corifeus-utils": "^2020.4.161",
         "fs-extra": "^9.0.0",
         "github-api": "^3.3.0",
         "globby": "^11.0.0",
