@@ -11,7 +11,7 @@
 
 
 
-# 💣 Tools v2020.4.150
+# 💣 Tools v2020.4.153
 
 
 
@@ -19,12 +19,12 @@
     
 
 ### NodeJs LTS Version Requirement
-```
+```txt
 >=12.13.0
 ```
 
 ### Built on NodeJs
-```
+```txt
 v12.16.3
 ```
 
@@ -80,7 +80,7 @@ If you want the commands is serials, add the ```-s``` or ```--serial``` flag, ot
 etc ...
 
 # Dependencies Fix
-http://cdn.corifeus.com/git/tools/dependencies-fix.json
+[dependencies-fix.json](dependencies-fix.json)
 
 
 # Webpack repos
@@ -92,7 +92,7 @@ http://cdn.corifeus.com/git/tools/dependencies-fix.json
 
 
 # Default excludes from GitHub:
-http://cdn.corifeus.com/git/tools/github.json
+[github.json](github.json)
 
 # Github fork upstream
 
@@ -396,7 +396,7 @@ All my domains ([patrikx3.com](https://patrikx3.com) and [corifeus.com](https://
 
 ---
 
-[**P3X-TOOLS**](https://corifeus.com/tools) Build v2020.4.150
+[**P3X-TOOLS**](https://corifeus.com/tools) Build v2020.4.153
 
 [![Donate for Corifeus / P3X](https://img.shields.io/badge/Donate-Corifeus-003087.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QZVM4V6HVZJW6)  [![Contact Corifeus / P3X](https://img.shields.io/badge/Contact-P3X-ff9900.svg)](https://www.patrikx3.com/en/front/contact) [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software)
 
