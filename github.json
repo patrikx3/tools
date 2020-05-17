@@ -1,5 +1,8 @@
 {
   "excludes":  [
-    "stackicons"
+      "stackicons",
+      "resume-php-common",
+      "resume-js-bootstrap",
+      "resume-js-common"
   ]
 }
