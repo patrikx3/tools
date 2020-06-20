@@ -19,6 +19,8 @@ const removeVersion = (repo, version, keptVersions, dry, all) => {
         }
     }
 
+    //FIXME deprecated
+    //const command = `npm deprecate --force --registry https://registry.npmjs.org  ${repo}@${version} "this package has been deprecated"`;
     const command = `npm unpublish ${repo}@${version} --registry https://registry.npmjs.org`;
     if (dry) {
         console.info(`[DRY] Removed version ${version}`);
@@ -26,11 +28,14 @@ const removeVersion = (repo, version, keptVersions, dry, all) => {
         return;
     }
     return new Promise((resolve, reject) => {
+        console.log(command)
         const run = exec(command, (e, stdout, stderr) => {
             if (e) {
+                //FIXME deprecated
                 return reject(e);
             }
             if (stderr !== '') {
+                //FIXME deprecated
                 return reject(new Error(stderr));
             }
             console.info(`Removed version ${version}`);
@@ -48,14 +53,14 @@ const removeVersion = (repo, version, keptVersions, dry, all) => {
 
 const findVersions = async (repo) => {
     return new Promise((resolve, reject) => {
-        exec(`npm show ${repo} --json`, async (e, stdout, stderr) => {
+        exec(`npm view ${repo} versions --json --registry https://registry.npmjs.org`, async (e, stdout, stderr) => {
             if (e) {
                 console.error(e);
                 reject(e);
                 return;
             }
-            const info = JSON.parse(stdout);
-            const versions = info.versions.reverse();
+            const versions = JSON.parse(stdout);
+            versions.reverse();
             console.info(`Versions:`, `${versions.length} versions`, versions);
             resolve(versions)
         });
@@ -73,8 +78,8 @@ const removePackage = async (repo, dry, all) => {
         }
     }
     const keptVersionsArray = Object.values(keptVersions);
-    const log = `${repo} 
-Total: ${versions.length} Kept Versions: ${keptVersionsArray.length} 
+    const log = `${repo}
+Total: ${versions.length} Kept Versions: ${keptVersionsArray.length}
 Remained versions, ${keptVersionsArray.join(' , ')}
 `;
     console.info(log);
@@ -90,7 +95,7 @@ module.exports = async (usernames, search, packages, dry, all) => {
     const isAll = packages.length === 0;
     console.info(`
 ----------------------------------------------
-Unpublish    
+Unpublish
 ----------------------------------------------
 Usernames: ${usernames.join(', ')}
 Search: ${search.join(', ')}
