@@ -10,6 +10,9 @@
         "redis-ui": [
             "configstore"
         ],
+        "redis-ui-material": [
+            "angular-material"
+        ],
         "gitlist": [
             "jquery",
             "bootswatch",
