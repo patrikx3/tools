@@ -7,7 +7,7 @@ const truncate = async (options) => {
     const command = `git config --global credential.helper 'cache --timeout 7200'
 git checkout --orphan temp
 git add -A
-git commit -am "robo8x (truncate)"
+git commit -am "r0b08x (truncate)"
 git branch -D master
 git branch -m master
 git branch --set-upstream-to origin/master master

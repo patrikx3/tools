@@ -57,7 +57,7 @@ commander
                 const name = validateGitName(plusCommands);
 
 // this is in server-scripts as well (the post-update)
-                await utils.childProcess.exec(`git init --bare ${name}                
+                await utils.childProcess.exec(`git init --bare ${name}
 echo "${name.substr(0, name.length - '.git'.length)}" > ${name}/description
 cat ${__dirname}/../git/post-update > ${name}/hooks/post-update
 chmod +x ${name}/hooks/post-update`, true)
@@ -105,7 +105,7 @@ chmod +x ${name}/hooks/post-update`, true)
                                     findData: findData,
                                     options: options,
                                     command: `git add .
-git commit -am robo8x || true 
+git commit -am r0b08x || true
 git push || true
 ${plusCommands === '' ? 'true' : plusCommands}`,
                                 })
