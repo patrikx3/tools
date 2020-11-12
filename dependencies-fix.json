@@ -5,41 +5,18 @@
         "corifeus-app-server-patrikx3": [
         ],
         "onenote": [
-            "configstore"
         ],
         "redis-ui": [
-            "configstore"
         ],
         "redis-ui-material": [
         ],
         "gitlist": [
-            "jquery",
-            "bootswatch",
-            "bootstrap"
         ],
         "angular-compile": [
-            "core-js",
-            "reflect-metadata",
-            "rxjs",
-            "tslib",
-            "zone.js",
-            "typescript"
         ],
         "corifeus-app-web-pages": [
-            "core-js",
-            "reflect-metadata",
-            "rxjs",
-            "tslib",
-            "zone.js",
-            "typescript"
         ],
         "angular-http-cache-interceptor": [
-            "core-js",
-            "reflect-metadata",
-            "rxjs",
-            "tslib",
-            "zone.js",
-            "typescript"
         ],
         "xml2json": [
         ]
