@@ -2,7 +2,7 @@
 const progress = require('progress');
 const fs = require('mz/fs');
 const path = require('path')
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 
 const execRaw = require('child_process').exec;
@@ -117,7 +117,7 @@ ${project === 'corifeus' ? '' : `popd`}
             console.log(actualCommand);
         }
         const run = execRaw(`bash -c '
-set -e    
+set -e
 ${actualCommand}
 '`, {
             stdio: `inherit`,
@@ -276,7 +276,7 @@ yarn link`, progress)
     await utils.array.forEachAsync(upgradeAbleKeys , (project) => {
         let command = ``
         upgradeAble[project].forEach((link) => {
-            command += `yarn link ${link}         
+            command += `yarn link ${link}
 `;
         })
         promises.push(exec(project, command, progress))

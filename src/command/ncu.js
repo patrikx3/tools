@@ -1,10 +1,10 @@
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 const path = require('path');
 const mz = require('mz');
 const lib = require('../lib');
 
-commander
+program
     .command('ncu')
     .description(`This is for global update`)
     .action(async function (options) {

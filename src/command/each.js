@@ -1,4 +1,4 @@
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 const find = utils.fs.find;
 const mz = require('mz');
@@ -38,7 +38,7 @@ Wait for enter...
 
 const loadCommander = (command) => {
 
-    commander
+    program
         .command(`${command} [plusCommands...]`)
         .option('-d, --dry', 'Do not actually remove packages, just show what it does')
         .option('-z, --disable-ncu', 'Disable ncu')

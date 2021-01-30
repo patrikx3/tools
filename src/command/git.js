@@ -1,4 +1,4 @@
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 const find = utils.fs.find;
 const path = require('path');
@@ -16,7 +16,7 @@ const commands = [
     'pull',
     'init',
 ]
-commander
+program
     .command('git [command] [plusCommands...]')
     .description(`
     The versioning is Major.Minor.Commit-Build

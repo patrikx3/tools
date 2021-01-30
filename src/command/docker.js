@@ -1,7 +1,7 @@
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 
-commander
+program
     .command('docker <command>')
     .description(`Commands:
     free: deletes no-name images and dead containers

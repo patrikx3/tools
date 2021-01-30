@@ -1,11 +1,11 @@
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 const yaml = require('yamljs')
 const mz = require('mz');
 const path = require('path')
 const _ = require('lodash');
 
-commander
+program
     .command('travis [commands...]')
     .description(`
     It is imporant, that before you do anything, install the travis Ruby gem.

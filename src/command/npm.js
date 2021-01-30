@@ -1,4 +1,4 @@
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 const mz = require('mz');
 const hasin = require('lodash/hasIn');
@@ -13,7 +13,7 @@ const commands = [
     'unpublish',
 ]
 
-commander
+program
     .command('npm <command> [packages...]')
     .description(`
     The versioning is Major.Minor.Commit-Build

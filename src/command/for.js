@@ -1,9 +1,9 @@
 // rmdirr dir dirs
-const commander = require('commander');
+const { program } = require('commander');
 const fsExtra = require('fs-extra');
 const utils = require('corifeus-utils');
 
-commander
+program
     .command('for <dir> <command...>')
     .description(`
 Finds a list of directories (without start ./ and end /) recursively
@@ -35,11 +35,11 @@ Finds a list of directories (without start ./ and end /) recursively
         const promises = [];
         paths.forEach(async (findData) => {
             const generatedCommand = `bash -c '
-pushd ${findData.dir}            
+pushd ${findData.dir}
 set -e
-export FOUND_DIR=${findData.dir}                
-export FOUND=${findData.path}                
-${command}            
+export FOUND_DIR=${findData.dir}
+export FOUND=${findData.path}
+${command}
 popd
 '`;
             if (dry) {

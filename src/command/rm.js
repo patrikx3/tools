@@ -1,8 +1,8 @@
-const commander = require('commander');
+const { program } = require('commander');
 const fsExtra = require('fs-extra');
 const utils = require('corifeus-utils');
 
-commander
+program
     .command('rm <dirs...>')
     .description(`
 Delete the list of directories (without start ./ and end /) recursively

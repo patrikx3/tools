@@ -1,11 +1,11 @@
 /*
-const commander = require('commander');
+const { program } = require('commander');
 
 // unpublish
 commander
     .command('pdf [file]')
     .description(`
-Parse a pdf file    
+Parse a pdf file
 `)
     .option('-d, --dry', 'Do not actually remove packages, just show what it does')
     .action(async function (file, options) {

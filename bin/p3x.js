@@ -11,7 +11,7 @@ if (!require('fs').existsSync(`${__dirname}/../node_modules`)) {
     });
 }
 
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 const pkg = require(`../package.json`);
 const mz = require('mz');
@@ -20,7 +20,7 @@ const start = async() => {
 // <command> required
 // [command] optional
 // [command ...] variable options
-    commander
+    program
         .version(pkg.version)
         .usage('[options]')
     ;
@@ -46,10 +46,10 @@ const start = async() => {
     }
     */
 
-    commander.parse(process.argv);
+    program.parse(process.argv);
 
     if (!process.argv.slice(2).length) {
-        commander.outputHelp();
+        program.outputHelp();
     }
 
 

@@ -1,14 +1,14 @@
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 const path = require('path');
 const mz = require('mz');
 const lib = require('../lib');
 
-commander
+program
     .command('redis [command] [param]')
     .option('-u, --url <url>', 'REDIS url')
-    .description(`This is for redis:   
-DEL    
+    .description(`This is for redis:
+DEL
     `)
     .action(async function (command, param, options) {
         let addon = '';

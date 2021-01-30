@@ -1,4 +1,4 @@
-const commander = require('commander');
+const { program } = require('commander');
 const utils = require('corifeus-utils');
 const find = utils.fs.find;
 const path = require('path');
@@ -11,7 +11,7 @@ const commands = [
     'mirror',
     'pull',
 ]
-commander
+program
     .command('github <command>')
     .description(`
     commands:
