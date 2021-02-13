@@ -1,5 +1,6 @@
 {
   "excludes":  [
+      "corifeus-app-server-patrikx3",
       "stackicons",
       "resume-php-common",
       "resume-js-bootstrap",
