@@ -2,7 +2,6 @@ const { program } = require('commander');
 const utils = require('corifeus-utils');
 const mz = require('mz');
 const hasin = require('lodash/hasIn');
-const globby = require('globby');
 
 const npmLib = require('../npm');
 

@@ -1,7 +1,7 @@
 const GitHub = require('github-api');
 const tmp = require('tmp-promise');
 const utils = require('corifeus-utils');
-const globby = require('globby');
+const glob = require('glob-promise');
 const mz = require('mz');
 const ini = require('ini');
 const url = require('url');
@@ -60,10 +60,10 @@ git submodule update --init --recursive  --remote
         await repos.forEachAsync(async (repo) => {
             const currentRepo = `${tmpDir.path}/git/${repo.name}`;
             await utils.childProcess.exec(`
-rm -rf ${currentRepo}/.git   
+rm -rf ${currentRepo}/.git
 rm -rf ${currentRepo}/secure
 rm -rf ${currentRepo}/package-lock.json
-                     
+
 mv ${tmpDir.path}/github/${repo.name}/.git ${tmpDir.path}/git/${repo.name}/
 `, true)
         })
@@ -137,7 +137,7 @@ ${dry ? 'true' : 'git push'}
 
 
 const replacePkg = async (root, user) => {
-    const files = await globby(`${root}/**/package.json`)
+    const files = await glob(`${root}/**/package.json`)
     await files.forEachAsync(async (file) => {
         console.info(`package.json ${file}`)
         const string = (await mz.fs.readFile(file)).toString();
@@ -148,7 +148,7 @@ const replacePkg = async (root, user) => {
 }
 
 const replaceGitSubmodules = async (root, user) => {
-    const files = await globby(`${root}/**/.gitmodules`)
+    const files = await glob(`${root}/**/.gitmodules`)
     await files.forEachAsync(async (file) => {
         console.info(`submodule found ${file}`)
         const string = (await mz.fs.readFile(file)).toString();
@@ -168,14 +168,14 @@ const replaceInitSh = async (root, gitUrl, user) => {
     const gitUrlObj = url.parse(gitUrl);
     gitUrl = RegExp.escape(`${gitUrlObj.protocol}//${gitUrlObj.hostname}`);
     const gitUrlRegexp = new RegExp(gitUrl, 'ig')
-    const files = await globby(`${root}/**/init.sh`)
+    const files = await glob(`${root}/**/init.sh`)
     await files.forEachAsync(async (file) => {
         console.info(`init.sh found ${file}`)
         const string = (await mz.fs.readFile(file)).toString();
         const result = string.replace(gitUrlRegexp, `https://github.com/${user}`)
         await mz.fs.writeFile(file, result);
         console.info(`
-${result}        
+${result}
         `);
         console.info(`init.sh replaced ${file}`)
     })
