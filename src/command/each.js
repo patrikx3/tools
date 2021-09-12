@@ -48,6 +48,7 @@ const loadCommander = (command) => {
         .option('-n, --non-interactive', 'Non interfactive')
         .option('-p, --disable-progress', 'Disable progress')
         .option('--registry', 'Registry')
+        .option('--verbose', 'Verbose')
         .option('-m, --packageManager <name>', 'Package manager')
         .option('-o, --only <only>', 'Only packages', (list) => {
             return list.split(',');
@@ -104,6 +105,9 @@ const executeCommand = async (command, plusCommands, options) => {
         plusCommands += ' -a'
     }
 
+    if (options.verbose) {
+        plusCommands += ' --verbose'
+    }
 
     let paths = await find({
         find: 'package.json',
@@ -136,7 +140,7 @@ const executeCommand = async (command, plusCommands, options) => {
         })
         return item;
     })
-    list = utils.require.resovleDependencies({
+    list = utils.require.resolveDependencies({
         modules: list,
         debug: false,
         recursive: [
