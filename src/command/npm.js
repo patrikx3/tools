@@ -48,7 +48,7 @@ program
 
             case 'update':
                 if (await mz.fs.exists('./package.json')) {
-                    await utils.childProcess.exec(`ncu -a --loglevel verbose --packageFile package.json`, true)
+                    await utils.childProcess.exec(`ncu -u --loglevel verbose --packageFile package.json`, true)
                 }
 
                 break;

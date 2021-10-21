@@ -11,7 +11,7 @@
 
 
 
-# 💣 Tools v2021.10.129
+# 💣 Tools v2021.10.135
 
 
 
@@ -63,7 +63,7 @@ p3x npm unpublish # unpublish every package from NPM except the last Minor versi
 p3x link # links every recursive given package together
 p3x git <command> # you can execute a command on every git dir, recursive
 p3x rm <folder> # remove recursive the given folder
-p3x ncu -a # updates recursive all packages
+p3x ncu -u # updates recursive all packages
 p3x git pull # recursive pull every folder
 p3x git push # recursive push every folder
 p3x git renew|truncate # remote all commits, from #1231 commit to #1
@@ -393,7 +393,7 @@ All my domains ([patrikx3.com](https://patrikx3.com) and [corifeus.com](https://
 
 ---
 
-[**P3X-TOOLS**](https://corifeus.com/tools) Build v2021.10.129
+[**P3X-TOOLS**](https://corifeus.com/tools) Build v2021.10.135
 
 [![Donate for Corifeus / P3X](https://img.shields.io/badge/Donate-Corifeus-003087.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QZVM4V6HVZJW6)  [![Contact Corifeus / P3X](https://img.shields.io/badge/Contact-P3X-ff9900.svg)](https://www.patrikx3.com/en/front/contact) [![Like Corifeus @ Facebook](https://img.shields.io/badge/LIKE-Corifeus-3b5998.svg)](https://www.facebook.com/corifeus.software)
 

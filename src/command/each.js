@@ -43,6 +43,7 @@ const loadCommander = (command) => {
         .option('-d, --dry', 'Do not actually remove packages, just show what it does')
         .option('-z, --disable-ncu', 'Disable ncu')
         .option('-a, --all', 'All')
+        .option('-u', 'ncu update all')
         .option('-s, --serial', 'Serial ')
         .option('-r, --read', 'read a key')
         .option('-n, --non-interactive', 'Non interfactive')

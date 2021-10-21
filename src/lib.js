@@ -41,7 +41,7 @@ const executeCommandByPath = async (options) => {
 
     if (command.includes('__NCU__')) {
         const ncu = getNcu({
-            all: options.options.all,
+            all: options.options.u || options.options.all,
             disableNcu: options.options.disableNcu,
             repo: options.item.pkg.corifeus === undefined ? options.item.pkg.name : options.item.pkg.corifeus.reponame
         })
