@@ -100,15 +100,10 @@ popd
             if (bar) {
                 bar.interrupt(data)
             }
-            if (!bar) {
-                console.log(data);
-            }
         });
         execPromise.exec.stderr.on('data', (data) => {
             if (bar) {
                 bar.interrupt(data)
-            } else {
-                console.error(data);
             }
         });
 

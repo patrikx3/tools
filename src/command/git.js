@@ -29,6 +29,8 @@ program
     .option('-d, --dry', 'Do not actually remove packages, just show what it does')
     .option('-a, --all', 'All')
     .option('-s, --serial', 'Serial')
+    .option('-p, --disable-progress', 'Disable progress')
+
     .action(async function (command, plusCommands, options) {
         let paths;
 
@@ -120,14 +122,13 @@ ${plusCommands === '' ? 'true' : plusCommands}`,
 
                 if (internalCommand !== undefined) {
                     let errors = [];
-                    const bar = lib.newProgress(command, paths)
                     await paths.forEachAsync(async (findData) => {
                         await lib.executeCommandByPath({
                             findData: findData,
                             command: internalCommand,
                             options: options,
                             errors: errors,
-                            bar: bar,
+                            bar: options.disableProgress !== true ? lib.newProgress(command, paths) : undefined,
                         })
                     }, options.serial)
                 }
