@@ -38,7 +38,7 @@
     },
     "homepage": "https://corifeus.com/tools",
     "devDependencies": {
-        "corifeus-builder": "^2021.10.169"
+        "corifeus-builder": "^2021.10.176"
     },
     "dependencies": {
         "commander": "^8.3.0",
