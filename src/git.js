@@ -1,5 +1,4 @@
 const utils = require('corifeus-utils');
-const glob = require('glob-promise');
 const path = require('path');
 
 const truncate = async (options) => {
@@ -23,6 +22,9 @@ git push -f origin master`
 }
 
 const findModules = async (root) => {
+    const { globby } = await import('globby')
+    const glob = globby
+
     const modules = await glob(`${root}/**/.gitmodules`);
     return modules.map((dir) => {
         return path.dirname(dir);

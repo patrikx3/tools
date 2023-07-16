@@ -1,7 +1,7 @@
 const GitHub = require('github-api');
 const tmp = require('tmp-promise');
 const utils = require('corifeus-utils');
-const glob = require('glob-promise');
+
 const mz = require('mz');
 const ini = require('ini');
 const url = require('url');
@@ -137,6 +137,9 @@ ${dry ? 'true' : 'git push'}
 
 
 const replacePkg = async (root, user) => {
+    const { globby } = await import('globby')
+    const glob = globby
+
     const files = await glob(`${root}/**/package.json`)
     await files.forEachAsync(async (file) => {
         console.info(`package.json ${file}`)
@@ -148,6 +151,9 @@ const replacePkg = async (root, user) => {
 }
 
 const replaceGitSubmodules = async (root, user) => {
+    const { globby } = await import('globby')
+    const glob = globby
+
     const files = await glob(`${root}/**/.gitmodules`)
     await files.forEachAsync(async (file) => {
         console.info(`submodule found ${file}`)
@@ -164,7 +170,9 @@ const replaceGitSubmodules = async (root, user) => {
 }
 
 const replaceInitSh = async (root, gitUrl, user) => {
-
+    const { globby } = await import('globby')
+    const glob = globby
+    
     const gitUrlObj = url.parse(gitUrl);
     gitUrl = RegExp.escape(`${gitUrlObj.protocol}//${gitUrlObj.hostname}`);
     const gitUrlRegexp = new RegExp(gitUrl, 'ig')

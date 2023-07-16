@@ -212,7 +212,8 @@ yarn link
         plusCommands = `sudo echo "SUDO IS DONE"
 __NCU__
 ${lib.hackNpmInstallPreHook()}
-npm install --non-interactive
+rm -rf node_modules
+npm install --non-interactive --force
 ${npmLib.command.publish({all: options.all})}`;
     }
 
@@ -306,7 +307,8 @@ ${npmLib.command.publish({all: options.all})}`;
                         execCommand = `
 __NCU__
 ${lib.hackNpmInstallPreHook()}
-npm install --non-interactive
+rm -rf node_modules
+npm install --non-interactive --force
 `;
 
                     }
