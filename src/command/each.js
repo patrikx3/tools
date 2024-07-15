@@ -208,14 +208,6 @@ yarn link
         plusCommands = 'list';
     }
 
-    if (plusCommands === 'start') {
-        plusCommands = `sudo echo "SUDO IS DONE"
-__NCU__
-${lib.hackNpmInstallPreHook()}
-rm -rf node_modules
-npm install --non-interactive --force
-${npmLib.command.publish({all: options.all})}`;
-    }
 
     const actual = [];
     let doActualExecute = false;
@@ -258,9 +250,21 @@ ${npmLib.command.publish({all: options.all})}`;
                         doActualExecute = true;
                     }
 
+                    let execCommand = plusCommands;
+                    if (plusCommands === 'start') {
+
+                        execCommand = `sudo echo "SUDO IS DONE"
+                __NCU__
+                ${lib.hackNpmInstallPreHook()}
+                rm -rf node_modules
+                npm install --non-interactive --force
+                ${npmLib.command.publish({all: options.all })}`;
+                
+                    }
+
                     await lib.executeCommandByPath({
                         findData: findData,
-                        command: plusCommands,
+                        command: execCommand,
                         errors: errors,
                         item: item,
                         options: options,
