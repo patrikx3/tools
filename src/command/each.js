@@ -257,7 +257,8 @@ yarn link
                 __NCU__
                 ${lib.hackNpmInstallPreHook()}
                 rm -rf node_modules
-                npm install --non-interactive --force
+                #npm install --non-interactive --force
+                yarn install --non-interactive --force
                 ${npmLib.command.publish({all: options.all })}`;
                 
                     }
@@ -312,7 +313,8 @@ yarn link
 __NCU__
 ${lib.hackNpmInstallPreHook()}
 rm -rf node_modules
-npm install --non-interactive --force
+#npm install --non-interactive --force
+yarn install --non-interactive --force
 `;
 
                     }
