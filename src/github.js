@@ -1,11 +1,19 @@
 const GitHub = require('github-api');
 const tmp = require('tmp-promise');
 const utils = require('corifeus-utils');
+const { mirrorExclude } = require('corifeus-builder').config;
 
 const mz = require('mz');
 const ini = require('ini');
 const url = require('url');
 const git = require('./git');
+
+const mirrorExcludeFindCmds = (dir) => [
+    ...mirrorExclude.files.map((f) =>
+        `find ${dir} -maxdepth 1 -iname "${f}" -exec rm -f {} +`),
+    ...mirrorExclude.dirs.map((d) =>
+        `find ${dir} -maxdepth 1 -iname "${d}" -type d -exec rm -rf {} +`),
+].join('\n');
 
 const list = async (options) => {
     const {only, user, exclude} = options;
@@ -61,8 +69,8 @@ git submodule update --init --recursive  --remote
             const currentRepo = `${tmpDir.path}/git/${repo.name}`;
             await utils.childProcess.exec(`
 rm -rf ${currentRepo}/.git
-rm -rf ${currentRepo}/secure
 #rm -rf ${currentRepo}/package-lock.json
+${mirrorExcludeFindCmds(currentRepo)}
 
 mv ${tmpDir.path}/github/${repo.name}/.git ${tmpDir.path}/git/${repo.name}/
 `, true)
@@ -95,7 +103,9 @@ git status
             try {
                 await utils.childProcess.exec(`
 cd ${tmpDir.path}/github/${repo.name}
-git commit -am "${note} ${new Date().toLocaleString()}"
+${git.claudeCommitSnippet(`${note} ${new Date().toLocaleString()}`)}
+git commit -a -F "$COMMIT_MSG_FILE"
+rm -f "$COMMIT_MSG_FILE"
 ${dry ? 'true' : 'git push'}
 `, true)
             } catch (e) {
@@ -108,9 +118,10 @@ ${dry ? 'true' : 'git push'}
             await utils.childProcess.exec(`
 cd ${module}
 git pull
-git checkout master
+MAIN_BRANCH=$(git remote show origin 2>/dev/null | sed -n 's/.*HEAD branch: //p') ; MAIN_BRANCH=\${MAIN_BRANCH:-master}
+git checkout $MAIN_BRANCH
 git submodule update --init --recursive  --remote
-git submodule foreach --recursive git checkout master
+git submodule foreach --recursive git checkout $MAIN_BRANCH
 git status
 ${dry ? 'true' : 'git push'}
 `, true)

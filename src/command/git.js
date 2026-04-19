@@ -107,7 +107,9 @@ chmod +x ${name}/hooks/post-update`, true)
                                     findData: findData,
                                     options: options,
                                     command: `git add .
-git commit -am r0b08x || true
+${git.claudeCommitSnippet('r0b08x')}
+git commit -a -F "$COMMIT_MSG_FILE" || true
+rm -f "$COMMIT_MSG_FILE"
 git push || true
 ${plusCommands === '' ? 'true' : plusCommands}`,
                                 })
