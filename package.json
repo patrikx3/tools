@@ -39,11 +39,11 @@
     },
     "homepage": "https://corifeus.com/tools",
     "devDependencies": {
-        "corifeus-builder": "^2026.4.149",
         "grunt": "^1.6.2"
     },
     "dependencies": {
         "commander": "^15.0.0-0",
+        "corifeus-builder": "^2026.4.149",
         "corifeus-utils": "^2026.4.130",
         "fs-extra": "^11.3.4",
         "github-api": "^3.4.0",
