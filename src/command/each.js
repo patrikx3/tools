@@ -225,9 +225,13 @@ yarn link
         if (pkg.name !== undefined && pkg.name.startsWith('corifeus-builder')) {
             hasBuilder = true;
         } else if (command === 'build' || command === 'publish') {
-            hasBuilder = deps.find((dep) => {
-                return dep.startsWith('corifeus-builder');
-            })
+            // Only build/publish packages that explicitly opt in via corifeus.build or
+            // corifeus.publish. Depending on corifeus-builder at runtime (e.g. server-scripts
+            // reusing its mirrorExclude config) does NOT make a package buildable.
+            if (pkg.corifeus !== undefined && (pkg.corifeus.build === true || pkg.corifeus.publish === true)) {
+                hasBuilder = true;
+            }
+            // else: leave hasBuilder undefined → package is skipped
         } else {
             hasBuilder = true;
         }

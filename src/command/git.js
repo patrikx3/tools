@@ -118,7 +118,23 @@ ${plusCommands === '' ? 'true' : plusCommands}`,
                         break;
 
                     case 'pull':
-                        internalCommand = `git pull`
+                        internalCommand = `if [ -n "$(git status --porcelain)" ]; then
+  echo "[p3x] SKIPPED (uncommitted changes): $(basename "$(pwd)")" >&2
+else
+  if ! git symbolic-ref -q HEAD >/dev/null; then
+    if git show-ref --verify --quiet refs/heads/master; then
+      git checkout master --quiet 2>/dev/null || true
+    elif git show-ref --verify --quiet refs/heads/main; then
+      git checkout main --quiet 2>/dev/null || true
+    else
+      echo "[p3x] NO BRANCH (no master/main): $(basename "$(pwd)")" >&2
+    fi
+  fi
+  if git symbolic-ref -q HEAD >/dev/null; then
+    git -c advice.diverging=false pull --ff-only || echo "[p3x] PULL FAILED: $(basename "$(pwd)")" >&2
+  fi
+fi
+true`
                         break;
                 }
 

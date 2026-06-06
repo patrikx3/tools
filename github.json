@@ -4,6 +4,7 @@
       "stackicons",
       "resume-php-common",
       "resume-js-bootstrap",
-      "resume-js-common"
+      "resume-js-common",
+      ".github"
   ]
 }

@@ -183,7 +183,7 @@ const publish = async () => {
         const setting = settings[project];
         if (setting !== undefined && setting.hasOwnProperty('publish') ) {
             await exec(project, `${commander.npm ? '' : 'grunt cory-npm'}
-npm publish ${commander.npm ? ' --registry https://registry.npmjs.org' : ''}`, barPublish);
+yarn publish ${commander.npm ? ' --registry https://registry.npmjs.org' : ''}`, barPublish);
             await upgrade(barPublish)
         } else {
             barPublish.tick({
